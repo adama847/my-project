@@ -50,7 +50,7 @@ export default function Home() {
   {
     id: 3,
     type: "video",
-    src: "src/assets/video/WhatsApp Video 2026-02-24 at 20.41.43.mp4", // ⚠️ doit être un vrai fichier mp4
+    src: "/video/WhatsApp Video 2026-02-24 at 20.41.43.mp4",
     title: "Beauté & Perruques",
     text: "Perruques premium pour une allure irrésistible.",
   },
@@ -106,7 +106,6 @@ export default function Home() {
 >
 
   {/* Video uniquement si type video */}
-  {slides[current].type === "video" && (
     <video
       key={slides[current].id}
       src={slides[current].src}
@@ -116,7 +115,6 @@ export default function Home() {
       playsInline
       className="absolute w-full h-full object-cover"
     />
-  )}
 
   {/* Overlay noir */}
   <div className="absolute inset-0 bg-black/70"></div>
