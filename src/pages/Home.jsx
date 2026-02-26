@@ -85,10 +85,18 @@ export default function Home() {
                         EvahStore
                     </h1>
                 </div>
+                <div>
+                    <a href="#collection" className="mx-4 hover:text-[#D4AF37] transition">
+                        Collection
+                    </a>
+                    <a href="#best-sellers" className="mx-4 hover:text-[#D4AF37] transition">
+                        Best Sellers
+                    </a>
+                </div>
             </nav>
 
             {/* HERO SLIDER */}
-            <section className="relative h-[100vh] overflow-hidden">
+            <section className="relative h-[100vh] overflow-hidden" id="collection">
 
                 {slides[current].type === "image" ? (
                     <div
