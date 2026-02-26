@@ -50,7 +50,7 @@ export default function Home() {
         {
             id: 3,
             type: "video",
-            src: "public/video/WhatsApp Video 2026-02-24 at 20.41.43.mp4",
+            src: "/video/WhatsApp Video 2026-02-24 at 20.41.43.mp4",
             title: "Beauté & Perruques",
             text: "Perruques premium pour une allure irrésistible."
         }
@@ -104,7 +104,7 @@ export default function Home() {
                         style={{
                             backgroundImage: `url(${slides[current].src})`,
                             backgroundAttachment: "fixed",
-                            backgroundSize: "cover"
+                            backgroundSize: "cover",
                         }}
                     />
                 ) : (
