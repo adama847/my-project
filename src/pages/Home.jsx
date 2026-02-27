@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaInstagramSquare, FaFacebook } from "react-icons/fa";
 import { AiFillTikTok } from "react-icons/ai";
-
+import { Menu, X } from "lucide-react";
 import img from "../assets/img/Evahh.jpeg";
 
 export default function Home() {
@@ -13,24 +13,137 @@ export default function Home() {
             id: 1,
             name: "Montre Élégance Or",
             price: "15 000 FCFA",
-            image: "https://via.placeholder.com/300x300",
+            image: "https://i.pinimg.com/1200x/4f/f7/ea/4ff7ea7fcccb5374e1edb6457936c30d.jpg",
             badge: "Nouveau",
         },
         {
             id: 2,
             name: "Collier Queen Gold",
             price: "8 000 FCFA",
-            image: "https://via.placeholder.com/300x300",
+            image: "https://i.pinimg.com/736x/fd/5a/4c/fd5a4c9f89a25b1d5f1e4d50801ace17.jpg",
             badge: "",
         },
         {
             id: 3,
             name: "Perruque Luxe Wave",
             price: "35 000 FCFA",
-            image: "https://via.placeholder.com/300x300",
+            image: "https://i.pinimg.com/736x/a6/1b/9e/a61b9edd36c14fe473e08d33258848ab.jpg",
+            badge: "Promo",
+        },
+        {
+            id: 4,
+            name: "Montre Élégance Or",
+            price: "15 000 FCFA",
+            image: "https://i.pinimg.com/1200x/82/b3/9c/82b39c7533883fee651ce222749a4237.jpg",
+            badge: "Nouveau",
+        },
+        {
+            id: 5,
+            name: "Collier Queen Gold",
+            price: "8 000 FCFA",
+            image: "https://i.pinimg.com/736x/72/40/5f/72405f7620a918959665677e45b8ad7c.jpg",
+            badge: "",
+        },
+        {
+            id: 6,
+            name: "Perruque Luxe Wave",
+            price: "35 000 FCFA",
+            image: "https://i.pinimg.com/736x/f1/e4/39/f1e43910448bdcf7f783ffb36a5b00ad.jpg",
             badge: "Promo",
         }
     ];
+
+    const products2 = [
+        {
+            id: 1,
+            name: "Montre Élégance Or",
+            price: "15 000 FCFA",
+            image: "https://i.pinimg.com/1200x/fe/20/a3/fe20a3e9e2a80854d19d6083833c1351.jpg",
+            badge: "Nouveau",
+        },
+        {
+            id: 2,
+            name: "Collier Queen Gold",
+            price: "8 000 FCFA",
+            image: "https://i.pinimg.com/736x/1b/e6/bd/1be6bd532e42e365677e8a819ef4a565.jpg",
+            badge: "",
+        },
+        {
+            id: 3,
+            name: "Perruque Luxe Wave",
+            price: "35 000 FCFA",
+            image: "https://i.pinimg.com/736x/f4/43/de/f443de3308bfe234d2d59e0946d5851f.jpg",
+            badge: "Promo",
+        },
+        {
+            id: 4,
+            name: "Montre Élégance Or",
+            price: "15 000 FCFA",
+            image: "https://i.pinimg.com/736x/f8/62/35/f862356e618cc50de91703d617ebc70a.jpg",
+            badge: "Nouveau",
+        },
+        {
+            id: 5,
+            name: "Collier Queen Gold",
+            price: "8 000 FCFA",
+            image: "https://i.pinimg.com/736x/01/bd/51/01bd51635ee667d3753ef67689627ced.jpg",
+            badge: "",
+        },
+        {
+            id: 6,
+            name: "Perruque Luxe Wave",
+            price: "35 000 FCFA",
+            image: "https://i.pinimg.com/736x/5e/7e/d5/5e7ed5289db06bb5fd1d716e8f657437.jpg",
+            badge: "Promo",
+        }
+    ];
+
+
+     const products3 = [
+        {
+            id: 1,
+            name: "Montre Élégance Or",
+            price: "15 000 FCFA",
+            image: "https://i.pinimg.com/1200x/e5/c4/e6/e5c4e61b3784b2d053f227f03b517e71.jpg",
+            badge: "Nouveau",
+        },
+        {
+            id: 2,
+            name: "Collier Queen Gold",
+            price: "8 000 FCFA",
+            image: "https://i.pinimg.com/736x/ac/94/6c/ac946cbd0ce3f81371fa4443061676ba.jpg",
+            badge: "",
+        },
+        {
+            id: 3,
+            name: "Perruque Luxe Wave",
+            price: "35 000 FCFA",
+            image: "https://i.pinimg.com/736x/fa/88/56/fa8856433dd5a1d7c6184011ba06d406.jpg",
+            badge: "Promo",
+        },
+        {
+            id: 4,
+            name: "Montre Élégance Or",
+            price: "15 000 FCFA",
+            image: "https://i.pinimg.com/736x/12/27/bc/1227bcf2aee4d99591c6336f2eff3430.jpg",
+            badge: "Nouveau",
+        },
+        {
+            id: 5,
+            name: "Collier Queen Gold",
+            price: "8 000 FCFA",
+            image: "https://i.pinimg.com/736x/e9/e0/58/e9e05888f5508675de8ed0ec4a7159f8.jpg",
+            badge: "",
+        },
+        {
+            id: 6,
+            name: "Perruque Luxe Wave",
+            price: "35 000 FCFA",
+            image: "https://i.pinimg.com/736x/6f/d2/c6/6fd2c6f99b844457e533f0db5ee2283e.jpg",
+            badge: "Promo",
+        }
+    ];
+
 
     const slides = [
         {
@@ -55,6 +168,7 @@ export default function Home() {
             text: "Perruques premium pour une allure irrésistible."
         }
     ];
+  const [open, setOpen] = useState(false);
 
     const [current, setCurrent] = useState(0);
 
@@ -78,22 +192,66 @@ export default function Home() {
         <div className="bg-[#0F0F0F] min-h-screen text-white">
 
             {/* NAVBAR */}
-            <nav className="flex justify-between fixed w-full z-50 bg-black items-center px-8 py-5 border-b border-[#D4AF37]/30">
-                <div className="flex items-center gap-3">
-                    <img src={img} alt="Logo" className="w-12 h-12 rounded-full" />
-                    <h1 className="text-2xl font-bold text-[#D4AF37] tracking-widest">
-                        EvahStore
-                    </h1>
-                </div>
-                <div>
-                    <a href="#collection" className="mx-4 hover:text-[#D4AF37] transition">
-                        Collection
-                    </a>
-                    <a href="#best-sellers" className="mx-4 hover:text-[#D4AF37] transition">
-                        Best Sellers
-                    </a>
-                </div>
-            </nav>
+           <nav className="fixed w-full z-50 bg-black border-b border-[#D4AF37]/30">
+      <div className="flex justify-between items-center px-6 md:px-8 py-4">
+        
+        {/* LOGO */}
+        <div className="flex items-center gap-3">
+          <img src={img} alt="Logo" className="w-10 h-10 rounded-full" />
+          <h1 className="text-xl md:text-2xl font-bold text-[#D4AF37] tracking-widest">
+            EvahStore
+          </h1>
+        </div>
+
+        {/* MENU DESKTOP */}
+        <div className="hidden md:flex items-center">
+          <a href="#collection" className="mx-4 hover:text-[#D4AF37] transition">
+            Collection
+          </a>
+          <a href="#accessoires" className="mx-4 hover:text-[#D4AF37] transition">
+            Accessoires
+          </a>
+          <a href="#cou" className="mx-4 hover:text-[#D4AF37] transition">
+            Blog
+          </a>
+        </div>
+
+        {/* MENU MOBILE BUTTON */}
+        <button
+          className="md:hidden text-white"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+
+      {/* MOBILE MENU */}
+      {open && (
+        <div className="md:hidden bg-black px-6 pb-6 space-y-4 text-center">
+          <a
+            href="#collection"
+            className="block hover:text-[#D4AF37] transition"
+            onClick={() => setOpen(false)}
+          >
+            Collection
+          </a>
+          <a
+            href="#accessoires"
+            className="block hover:text-[#D4AF37] transition"
+            onClick={() => setOpen(false)}
+          >
+            Accessoires
+          </a>
+          <a
+            href="#Blog"
+            className="block hover:text-[#D4AF37] transition"
+            onClick={() => setOpen(false)}
+          >
+            Blog
+          </a>
+        </div>
+      )}
+    </nav>
 
             {/* HERO SLIDER */}
             <section className="relative h-[100vh] overflow-hidden" id="collection">
@@ -103,7 +261,6 @@ export default function Home() {
                         className="absolute inset-0 bg-cover bg-center transition-all duration-700"
                         style={{
                             backgroundImage: `url(${slides[current].src})`,
-                            backgroundAttachment: "fixed",
                             backgroundSize: "cover",
                         }}
                     />
@@ -193,7 +350,60 @@ export default function Home() {
                     ))}
                 </div>
             </section>
+<section className="relative h-[100vh]  overflow-hidden" id="collection">
 
+                {slides[current].type === "image" ? (
+                    <div
+                        className="absolute inset-0 bg-cover bg-center transition-all duration-700"
+                        style={{
+                            backgroundImage: `url(${slides[current].src})`,
+                            backgroundAttachment: "fixed",
+                            backgroundSize: "cover",
+                        }}
+                    />
+                ) : (
+                    <video
+                        src={slides[current].src}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="absolute w-full h-full object-cover"
+                    />
+                )}
+
+                <div className="absolute inset-0 bg-black/70" />
+
+                <div className="relative z-10 flex flex-col justify-center items-center text-center h-full px-6" id="accessoires">
+
+                    <h2 className="text-5xl md:text-6xl font-bold">
+                        {slides[current].title}
+                    </h2>
+
+                    <p className="mt-6 text-gray-300 max-w-xl">
+                        {slides[current].text}
+                    </p>
+
+                    <button className="mt-10 bg-[#D4AF37] text-black px-10 py-3 rounded-full hover:bg-black hover:text-[#D4AF37] border border-transparent hover:border-[#D4AF37] transition" >
+                        accessoires
+                    </button>
+
+                </div>
+
+                {/* Indicators */}
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+                    {slides.map((_, index) => (
+                        <div
+                            key={index}
+                            onClick={() => setCurrent(index)}
+                            className={`w-3 h-3 rounded-full cursor-pointer transition ${
+                                current === index ? "bg-[#D4AF37]" : "bg-white/40"
+                            }`}
+                        />
+                    ))}
+                </div>
+
+            </section>
             {/* PRODUITS */}
             <section className="px-8 py-20">
                 <h3 className="text-3xl font-bold text-center text-[#D4AF37] mb-14">
@@ -201,7 +411,7 @@ export default function Home() {
                 </h3>
 
                 <div className="grid md:grid-cols-3 gap-10">
-                    {products.map((product) => (
+                    {products2.map((product) => (
                         <div
                             key={product.id}
                             className="bg-[#1A1A1A] rounded-3xl p-6 shadow-xl hover:shadow-[#D4AF37]/40 hover:scale-105 transition duration-300 relative"
@@ -234,6 +444,60 @@ export default function Home() {
                     ))}
                 </div>
             </section>
+            <section className="relative h-[100vh]  overflow-hidden" id="collection">
+
+                {slides[current].type === "image" ? (
+                    <div
+                        className="absolute inset-0 bg-cover bg-center transition-all duration-700"
+                        style={{
+                            backgroundImage: `url(${slides[current].src})`,
+                            backgroundAttachment: "fixed",
+                            backgroundSize: "cover",
+                        }}
+                    />
+                ) : (
+                    <video
+                        src={slides[current].src}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="absolute w-full h-full object-cover"
+                    />
+                )}
+
+                <div className="absolute inset-0 bg-black/70" />
+
+                <div className="relative z-10 flex flex-col justify-center items-center text-center h-full px-6" id="Blog">
+
+                    <h2 className="text-5xl md:text-6xl font-bold">
+                        {slides[current].title}
+                    </h2>
+
+                    <p className="mt-6 text-gray-300 max-w-xl">
+                        {slides[current].text}
+                    </p>
+
+                    <button className="mt-10 bg-[#D4AF37] text-black px-10 py-3 rounded-full hover:bg-black hover:text-[#D4AF37] border border-transparent hover:border-[#D4AF37] transition" id="accessoires">
+                        Blog
+                    </button>
+
+                </div>
+
+                {/* Indicators */}
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+                    {slides.map((_, index) => (
+                        <div
+                            key={index}
+                            onClick={() => setCurrent(index)}
+                            className={`w-3 h-3 rounded-full cursor-pointer transition ${
+                                current === index ? "bg-[#D4AF37]" : "bg-white/40"
+                            }`}
+                        />
+                    ))}
+                </div>
+
+            </section>
 
             {/* PRODUITS */}
             <section className="px-8 py-20">
@@ -245,7 +509,7 @@ export default function Home() {
                  </div>
 
                 <div className="grid md:grid-cols-3 gap-10">
-                    {products.map((product) => (
+                    {products3.map((product) => (
                         <div
                             key={product.id}
                             className="bg-[#1A1A1A] rounded-3xl p-6 shadow-xl hover:shadow-[#D4AF37]/40 hover:scale-105 transition duration-300 relative"
