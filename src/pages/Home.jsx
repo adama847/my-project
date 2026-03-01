@@ -6,7 +6,7 @@ import img from "../assets/img/Evahh.jpeg";
 
 export default function Home() {
 
-    const phoneNumber = "22178663236";
+    const phoneNumber = "221774186116";
 
     const products = [
         {
@@ -104,42 +104,63 @@ export default function Home() {
             id: 1,
             name: "Montre Élégance Or",
             price: "15 000 FCFA",
-            image: "https://i.pinimg.com/1200x/e5/c4/e6/e5c4e61b3784b2d053f227f03b517e71.jpg",
+            image: "/video/video-perruque1.mp4",
             badge: "Nouveau",
         },
         {
             id: 2,
             name: "Collier Queen Gold",
             price: "8 000 FCFA",
-            image: "https://i.pinimg.com/736x/ac/94/6c/ac946cbd0ce3f81371fa4443061676ba.jpg",
+            image: "/video/video-perruque2.mp4",
             badge: "",
         },
         {
             id: 3,
             name: "Perruque Luxe Wave",
             price: "35 000 FCFA",
-            image: "https://i.pinimg.com/736x/fa/88/56/fa8856433dd5a1d7c6184011ba06d406.jpg",
+            image: "/video/video-perruque3.mp4",
             badge: "Promo",
         },
         {
             id: 4,
             name: "Montre Élégance Or",
             price: "15 000 FCFA",
-            image: "https://i.pinimg.com/736x/12/27/bc/1227bcf2aee4d99591c6336f2eff3430.jpg",
+            image: "/video/video-perruque4.mp4",
             badge: "Nouveau",
         },
         {
             id: 5,
             name: "Collier Queen Gold",
             price: "8 000 FCFA",
-            image: "https://i.pinimg.com/736x/e9/e0/58/e9e05888f5508675de8ed0ec4a7159f8.jpg",
+            image: "/video/video-perruque5.mp4",
             badge: "",
         },
         {
             id: 6,
             name: "Perruque Luxe Wave",
             price: "35 000 FCFA",
-            image: "https://i.pinimg.com/736x/6f/d2/c6/6fd2c6f99b844457e533f0db5ee2283e.jpg",
+            image: "/video/video-perruque6.mp4",
+            badge: "Promo",
+        },
+         {
+            id: 7,
+            name: "Perruque Luxe Wave",
+            price: "35 000 FCFA",
+            image: "/video/video-perruque7.mp4",
+            badge: "Promo",
+        },
+         {
+            id: 8,
+            name: "Perruque Luxe Wave",
+            price: "35 000 FCFA",
+            image: "/video/video-perruque8.mp4",
+            badge: "Promo",
+        },
+        {
+            id: 9,
+            name: "Perruque Luxe Wave",
+            price: "35 000 FCFA",
+            image: "/video/video-perruque9.mp4",
             badge: "Promo",
         }
     ];
@@ -180,13 +201,49 @@ export default function Home() {
         return () => clearInterval(interval);
     }, []);
 
+    const slides2 = [
+        {
+            id: 1,
+            type: "image",
+            src: "https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=1200",
+            title: "L’élégance en Or",
+            text: "Bijoux haut de gamme pour femmes modernes."
+        },
+        {
+            id: 2,
+            type: "video",
+            src: "/video/video-perruque4.mp4",
+            title: "Montres de Luxe",
+            text: "Des montres élégantes pour sublimer votre style."
+        },
+        {
+            id: 3,
+            type: "video",
+            src: "/video/video-perruque7.mp4",
+            title: "Beauté & Perruques",
+            text: "Perruques premium pour une allure irrésistible."
+        }
+    ];
+
+
+    const [current1, setCurrent1] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrent1(prev => (prev + 1) % slides2.length);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, []);
+
     const handleWhatsApp = (product) => {
-        const message = `Bonjour, je veux commander ${product.name} à ${product.price}`;
+        const message = `Bonjour, je veux commander ${product.name} à ${product.price} voici le produit ${product.image}`;
         window.open(
             `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,
             "_blank"
         );
     };
+   
 
     return (
         <div className="bg-[#0F0F0F] min-h-screen text-white">
@@ -331,7 +388,7 @@ export default function Home() {
                             <img
                                 src={product.image}
                                 alt={product.name}
-                                className="rounded-xl mb-5"
+                                className="rounded-xl w-full h-130 mb-5"
                             />
 
                             <h4 className="text-xl font-semibold">{product.name}</h4>
@@ -425,7 +482,7 @@ export default function Home() {
                             <img
                                 src={product.image}
                                 alt={product.name}
-                                className="rounded-xl mb-5"
+                                className="rounded-xl w-full h-130 mb-5"
                             />
 
                             <h4 className="text-xl font-semibold">{product.name}</h4>
@@ -446,18 +503,18 @@ export default function Home() {
             </section>
             <section className="relative h-[100vh]  overflow-hidden" id="collection">
 
-                {slides[current].type === "image" ? (
+                {slides2[current1].type === "image" ? (
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-700"
                         style={{
-                            backgroundImage: `url(${slides[current].src})`,
+                            backgroundImage: `url(${slides2[current1].src})`,
                             backgroundAttachment: "fixed",
                             backgroundSize: "cover",
                         }}
                     />
                 ) : (
                     <video
-                        src={slides[current].src}
+                        src={slides2[current1].src}
                         autoPlay
                         muted
                         loop
@@ -471,11 +528,11 @@ export default function Home() {
                 <div className="relative z-10 flex flex-col justify-center items-center text-center h-full px-6" id="Blog">
 
                     <h2 className="text-5xl md:text-6xl font-bold">
-                        {slides[current].title}
+                        {slides2[current1].title}
                     </h2>
 
                     <p className="mt-6 text-gray-300 max-w-xl">
-                        {slides[current].text}
+                        {slides2[current1].text}
                     </p>
 
                     <button className="mt-10 bg-[#D4AF37] text-black px-10 py-3 rounded-full hover:bg-black hover:text-[#D4AF37] border border-transparent hover:border-[#D4AF37] transition" id="accessoires">
@@ -486,12 +543,12 @@ export default function Home() {
 
                 {/* Indicators */}
                 <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
-                    {slides.map((_, index) => (
+                    {slides2.map((_, index) => (
                         <div
                             key={index}
-                            onClick={() => setCurrent(index)}
+                            onClick={() => setCurrent1(index)}
                             className={`w-3 h-3 rounded-full cursor-pointer transition ${
-                                current === index ? "bg-[#D4AF37]" : "bg-white/40"
+                                current1 === index ? "bg-[#D4AF37]" : "bg-white/40"
                             }`}
                         />
                     ))}
@@ -510,36 +567,48 @@ export default function Home() {
 
                 <div className="grid md:grid-cols-3 gap-10">
                     {products3.map((product) => (
-                        <div
-                            key={product.id}
-                            className="bg-[#1A1A1A] rounded-3xl p-6 shadow-xl hover:shadow-[#D4AF37]/40 hover:scale-105 transition duration-300 relative"
-                        >
-                            {product.badge && (
-                                <span className="absolute top-4 left-4 bg-[#D4AF37] text-black text-xs px-3 py-1 rounded-full font-bold">
-                                    {product.badge}
-                                </span>
-                            )}
+  <div
+    key={product.id}
+    className="bg-[#1A1A1A] rounded-3xl p-6 shadow-xl hover:shadow-[#D4AF37]/40 hover:scale-105 transition duration-300 relative"
+  >
+    {product.badge && (
+      <span className="absolute top-4 left-4 bg-[#D4AF37] text-black text-xs px-3 py-1 rounded-full font-bold">
+        {product.badge}
+      </span>
+    )}
 
-                            <img
-                                src={product.image}
-                                alt={product.name}
-                                className="rounded-xl mb-5"
-                            />
+    {/* IMAGE OU VIDEO */}
+    {product.image.endsWith(".mp4") ? (
+      <video
+        src={product.image}
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="rounded-xl mb-5 w-full h-130 object-cover"
+      />
+    ) : (
+      <img
+        src={product.image}
+        alt={product.name}
+        className="rounded-xl mb-5 w-full h-104 object-cover"
+      />
+    )}
 
-                            <h4 className="text-xl font-semibold">{product.name}</h4>
+    <h4 className="text-xl font-semibold">{product.name}</h4>
 
-                            <p className="text-[#D4AF37] font-bold mt-2 text-lg">
-                                {product.price}
-                            </p>
+    <p className="text-[#D4AF37] font-bold mt-2 text-lg">
+      {product.price}
+    </p>
 
-                            <button
-                                onClick={() => handleWhatsApp(product)}
-                                className="mt-6 w-full bg-[#D4AF37] text-black py-2 rounded-full font-semibold hover:bg-black hover:text-[#D4AF37] hover:border hover:border-[#D4AF37] transition duration-300"
-                            >
-                                Commander sur WhatsApp
-                            </button>
-                        </div>
-                    ))}
+    <button
+      onClick={() => handleWhatsApp(product)}
+      className="mt-6 w-full bg-[#D4AF37] text-black py-2 rounded-full font-semibold hover:bg-black hover:text-[#D4AF37] hover:border hover:border-[#D4AF37] transition duration-300"
+    >
+      Commander sur WhatsApp
+    </button>
+  </div>
+))}
                 </div>
             </section>
 
