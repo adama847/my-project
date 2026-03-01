@@ -650,7 +650,7 @@ export default function Home() {
 
                     <div>
                         <p className="text-2xl font-semibold">contact us</p>
-                        <p className="text-gray-400 text-center">776632038</p>
+                        <p className="text-gray-400 text-center">786632038</p>
                        
                     </div>
                 </div>
@@ -658,7 +658,7 @@ export default function Home() {
                 <hr className="border-r-8 border-gray-700  w-md my-3" />
                  </div>
                  <p className="text-gray-400 mt-4 text-center">
-                            © 2024 EvahStore. Tous droits réservés.
+                            © 2026 EvahStore. Tous droits réservés.
                         </p>
                 <p className="text-gray-400 mt-2 text-center">
                     Livraison rapide • Paiement à la livraison • Disponible 7j/7
