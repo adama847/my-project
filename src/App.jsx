@@ -3,7 +3,8 @@ import './App.css'
 import ProduitsBracelet from './pages/Produitsbracelet'
 import { Routes, Route, Navigate } from "react-router-dom";
 import ProduitsPerruque from './pages/ProduitsPerruque';
-import { ProduitsMontre } from './pages/ProduitsMontre';
+import ProduitsMontre from './pages/ProduitsMontre';
+
 function App() {
 
   return (
