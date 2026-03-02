@@ -4,6 +4,7 @@ import { AiFillTikTok } from "react-icons/ai";
 import { Menu, X } from "lucide-react";
 import img from "../assets/img/Evahh.jpeg";
 import { FaWhatsapp } from "react-icons/fa";
+import { Link } from "react-router-dom";
 export default function Home() {
 
     
@@ -416,7 +417,12 @@ Des bijoux intemporels, des accessoires modernes et des perruques soigneusement 
                             </button>
                         </div>
                     ))}
+
+                    
                 </div>
+                <div className="flex  mt-15 w-full items-center justify-center">
+                        <h3 className="text-center text-[#D4AF37] font-bold"><Link to="/produits-montre">voir tous les produits</Link></h3>
+                    </div>
             </section>
 <section className="relative h-[100vh]  overflow-hidden" id="collection">
 
@@ -511,6 +517,9 @@ Des bijoux intemporels, des accessoires modernes et des perruques soigneusement 
                         </div>
                     ))}
                 </div>
+                <div className="flex  mt-15 w-full items-center justify-center">
+                        <h3 className="text-center text-[#D4AF37] font-bold"><Link to="/produits-bracelet ">voir tous les produits</Link></h3>
+                    </div>
             </section>
             <section className="relative h-[100vh]  overflow-hidden" id="collection">
 
@@ -621,6 +630,9 @@ Des bijoux intemporels, des accessoires modernes et des perruques soigneusement 
   </div>
 ))}
                 </div>
+                <div className="flex  mt-15 w-full items-center justify-center">
+                        <h3 className="text-center text-[#D4AF37] font-bold"><Link to="/produits-perruque">voir tous les produits</Link></h3>
+                    </div>
             </section>
 
             {/* WHATSAPP FLOATING BUTTON */}
