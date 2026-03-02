@@ -1,6 +1,6 @@
 import Home from './pages/Home'
 import './App.css'
-import ProduitsBracelet from './pages/Produitsbracelet'
+import ProduitsBracelet from './pages/ProduitsBracelet';
 import { Routes, Route, Navigate } from "react-router-dom";
 import ProduitsPerruque from './pages/ProduitsPerruque';
 import ProduitsMontre from './pages/ProduitsMontre';
