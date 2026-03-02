@@ -145,27 +145,7 @@ export default function Home() {
             image: "/video/video-perruque6.mp4",
             badge: "Promo",
         },
-         {
-            id: 7,
-            name: "Perruque Luxe Wave",
-            price: "35 000 FCFA",
-            image: "/video/video-perruque7.mp4",
-            badge: "Promo",
-        },
-         {
-            id: 8,
-            name: "Perruque Luxe Wave",
-            price: "35 000 FCFA",
-            image: "/video/video-perruque8.mp4",
-            badge: "Promo",
-        },
-        {
-            id: 9,
-            name: "Perruque Luxe Wave",
-            price: "35 000 FCFA",
-            image: "/video/video-perruque9.mp4",
-            badge: "Promo",
-        }
+       
     ];
 
 
