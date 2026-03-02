@@ -6,7 +6,7 @@ import img from "../assets/img/Evahh.jpeg";
 
 export default function Home() {
 
-    const phoneNumber = "221774186116";
+    const phoneNumber = "221786632036";
 
     const products = [
         {
@@ -370,7 +370,7 @@ export default function Home() {
             {/* PRODUITS */}
             <section className="px-8 py-20">
                 <h3 className="text-3xl font-bold text-center text-[#D4AF37] mb-14">
-                    Accesoire pour main
+                    fétiche et bracelet
                 </h3>
 
                 <div className="grid md:grid-cols-3 gap-10">
@@ -482,7 +482,7 @@ export default function Home() {
                             <img
                                 src={product.image}
                                 alt={product.name}
-                                className="rounded-xl w-full h-130 mb-5"
+                                className="rounded-xl w-full h-100 mb-5"
                             />
 
                             <h4 className="text-xl font-semibold">{product.name}</h4>
@@ -650,7 +650,7 @@ export default function Home() {
 
                     <div>
                         <p className="text-2xl font-semibold">contact us</p>
-                        <p className="text-gray-400 text-center">786632038</p>
+                        <p className="text-gray-400 text-center">786632036</p>
                        
                     </div>
                 </div>
