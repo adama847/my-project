@@ -3,8 +3,10 @@ import { FaInstagramSquare, FaFacebook } from "react-icons/fa";
 import { AiFillTikTok } from "react-icons/ai";
 import { Menu, X } from "lucide-react";
 import img from "../assets/img/Evahh.jpeg";
-
+import { FaWhatsapp } from "react-icons/fa";
 export default function Home() {
+
+    
 
     const phoneNumber = "221786632036";
 
@@ -171,7 +173,7 @@ export default function Home() {
             id: 1,
             type: "image",
             src: "https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=1200",
-            title: "L’élégance en Or",
+            title: "Shine.Style.Slay",
             text: "Bijoux haut de gamme pour femmes modernes."
         },
         {
@@ -309,6 +311,7 @@ export default function Home() {
         </div>
       )}
     </nav>
+    
 
             {/* HERO SLIDER */}
             <section className="relative h-[100vh] overflow-hidden" id="collection">
@@ -365,7 +368,15 @@ export default function Home() {
 
             </section>
 
-   
+   <section className="relative h-[100vh] overflow-hidden" id="About-us">
+        <div className="h-full w-full">
+             <div className="h-full w-full flex flex-col justify-center items-center bg-[#1a1a1a]">
+            <h2 className="text-4xl font-bold mt-15 text-[#D4AF37]">À propos de nous</h2>
+            <p className="text-center p-4 rounded-2xl  py-10 mt-15  bg-black w-lg">Evahstore est une marque dédiée aux femmes qui aiment la simplicité chic.
+Des bijoux intemporels, des accessoires modernes et des perruques soigneusement sélectionnées pour compléter parfaitement votre beauté naturelle.</p>
+         </div>
+        </div>
+    </section>
 
             {/* PRODUITS */}
             <section className="px-8 py-20">
@@ -388,7 +399,7 @@ export default function Home() {
                             <img
                                 src={product.image}
                                 alt={product.name}
-                                className="rounded-xl w-full h-130 mb-5"
+                                className="rounded-xl w-full h-100 mb-5"
                             />
 
                             <h4 className="text-xl font-semibold">{product.name}</h4>
@@ -617,9 +628,9 @@ export default function Home() {
                 href={`https://wa.me/${phoneNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="fixed bottom-6 right-6 bg-[#D4AF37] text-black px-5 py-3 rounded-full shadow-lg font-bold hover:bg-white transition"
+                className="fixed bottom-6 right-6 bg-green-400 text-black px-5 py-3 rounded-full shadow-lg font-bold hover:bg-green-600 transition"
             >
-                WhatsApp
+              <FaWhatsapp className="text-3xl text-white rounded-full" />
             </a>
 
             {/* FOOTER */}
