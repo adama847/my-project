@@ -351,9 +351,9 @@ export default function Home() {
 
    <section className="relative h-[100vh] overflow-hidden" id="About-us">
         <div className="h-full w-full">
-             <div className="h-full w-full flex flex-col justify-center items-center bg-[#1a1a1a]">
+             <div className="h-full md:w-full flex flex-col justify-center items-center bg-[#1a1a1a]">
             <h2 className="text-4xl font-bold mt-15 text-[#D4AF37]">À propos de nous</h2>
-            <p className="text-center p-4 rounded-2xl  py-10 mt-15  bg-black w-lg">Evahstore est une marque dédiée aux femmes qui aiment la simplicité chic.
+            <p className="text-center p-16 rounded-2xl  py-10 mt-15 shadow-2xl bg-black w-lg">Evahstore est une marque dédiée aux femmes qui aiment la simplicité chic.
 Des bijoux intemporels, des accessoires modernes et des perruques soigneusement sélectionnées pour compléter parfaitement votre beauté naturelle.</p>
          </div>
         </div>
