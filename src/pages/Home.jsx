@@ -7,7 +7,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 export default function Home() {
 
-    
+
 
     const phoneNumber = "221786632036";
 
@@ -102,7 +102,7 @@ export default function Home() {
     ];
 
 
-     const products3 = [
+    const products3 = [
         {
             id: 1,
             name: "Montre Élégance Or",
@@ -145,7 +145,7 @@ export default function Home() {
             image: "/video/video-perruque6.mp4",
             badge: "Promo",
         },
-       
+
     ];
 
 
@@ -172,7 +172,7 @@ export default function Home() {
             text: "Perruques premium pour une allure irrésistible."
         }
     ];
-  const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const [current, setCurrent] = useState(0);
 
@@ -185,6 +185,31 @@ export default function Home() {
     }, []);
 
     const slides2 = [
+        {
+            id: 1,
+            type: "image",
+            src: "https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=1200",
+            title: "L’élégance en Or",
+            text: "Bijoux haut de gamme pour femmes modernes."
+        },
+        {
+            id: 2,
+            type: "image",
+            src: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1200",
+            title: "Montres de Luxe",
+            text: "Des montres élégantes pour sublimer votre style."
+        },
+        {
+            id: 3,
+            type: "video",
+            src: "/video/video-perruque7.mp4",
+            title: "Beauté & Perruques",
+            text: "Perruques premium pour une allure irrésistible."
+        }
+    ];
+
+
+    const slides3 = [
         {
             id: 1,
             type: "image",
@@ -218,6 +243,15 @@ export default function Home() {
 
         return () => clearInterval(interval);
     }, []);
+    const [current2, setCurrent2] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrent2(prev => (prev + 1) % slides3.length);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, []);
 
     const handleWhatsApp = (product) => {
         const message = `Bonjour, je veux commander ${product.name} à ${product.price} voici le produit ${product.image}`;
@@ -226,153 +260,172 @@ export default function Home() {
             "_blank"
         );
     };
-   
+
 
     return (
-        <div className="bg-[#0F0F0F] min-h-screen text-white">
+        <div className="bg-[#f0eeee] min-h-screen text-white">
 
             {/* NAVBAR */}
-           <nav className="fixed w-full z-50 bg-black border-b border-[#D4AF37]/30">
-      <div className="flex justify-between items-center px-6 md:px-8 py-4">
-        
-        {/* LOGO */}
-        <div className="flex items-center gap-3">
-          <img src={img} alt="Logo" className="w-10 h-10 rounded-full" />
-          <h1 className="text-xl md:text-2xl font-bold text-[#D4AF37] tracking-widest">
-            EvahStore
-          </h1>
-        </div>
+            <nav className="fixed w-full z-50 bg-black border-b border-[#D4AF37]/30">
+                <div className="flex justify-between items-center px-6 md:px-8 py-4">
 
-        {/* MENU DESKTOP */}
-        <div className="hidden md:flex items-center">
-          <a href="#collection" className="mx-4 hover:text-[#D4AF37] transition">
-            Collection
-          </a>
-          <a href="#accessoires" className="mx-4 hover:text-[#D4AF37] transition">
-            Accessoires
-          </a>
-          <a href="#cou" className="mx-4 hover:text-[#D4AF37] transition">
-            Blog
-          </a>
-        </div>
+                    {/* LOGO */}
+                    <div className="flex items-center gap-3">
+                        <img src={img} alt="Logo" className="w-10 h-10 rounded-full" />
+                        <h1 className=" sm:text-2xl font-stretch-50% text-[#D4AF37] text-4xl text-gold-gradient animate-gold tracking-widest">
+                            EvahStore
+                        </h1>
+                    </div>
 
-        {/* MENU MOBILE BUTTON */}
-        <button
-          className="md:hidden text-white"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
+                    {/* MENU DESKTOP */}
+                    <div className="hidden md:flex items-center">
+                        <a href="#collection" className="mx-4 hover:text-[#D4AF37] transition">
+                            Collection
+                        </a>
+                        <a href="#accessoires" className="mx-4 hover:text-[#D4AF37] transition">
+                            Accessoires
+                        </a>
+                        <a href="#cou" className="mx-4 hover:text-[#D4AF37] transition">
+                            Blog
+                        </a>
+                    </div>
 
-      {/* MOBILE MENU */}
-      {open && (
-        <div className="md:hidden bg-black px-6 pb-6 space-y-4 text-center">
-          <a
-            href="#collection"
-            className="block hover:text-[#D4AF37] transition"
-            onClick={() => setOpen(false)}
-          >
-            Collection
-          </a>
-          <a
-            href="#accessoires"
-            className="block hover:text-[#D4AF37] transition"
-            onClick={() => setOpen(false)}
-          >
-            Accessoires
-          </a>
-          <a
-            href="#Blog"
-            className="block hover:text-[#D4AF37] transition"
-            onClick={() => setOpen(false)}
-          >
-            Blog
-          </a>
-        </div>
-      )}
-    </nav>
-    
+                    {/* MENU MOBILE BUTTON */}
+                    <button
+                        className="md:hidden text-white"
+                        onClick={() => setOpen(!open)}
+                    >
+                        {open ? <X size={28} /> : <Menu size={28} />}
+                    </button>
+                </div>
+
+                {/* MOBILE MENU */}
+                {open && (
+                    <div className="md:hidden bg-black px-6 pb-6 space-y-4 text-center">
+                        <a
+                            href="#collection"
+                            className="block hover:text-[#D4AF37] transition"
+                            onClick={() => setOpen(false)}
+                        >
+                            Collection
+                        </a>
+                        <a
+                            href="#accessoires"
+                            className="block hover:text-[#D4AF37] transition"
+                            onClick={() => setOpen(false)}
+                        >
+                            Accessoires
+                        </a>
+                        <a
+                            href="#Blog"
+                            className="block hover:text-[#D4AF37] transition"
+                            onClick={() => setOpen(false)}
+                        >
+                            Blog
+                        </a>
+                    </div>
+                )}
+            </nav>
+
 
             {/* HERO SLIDER */}
             <section className="relative h-[100vh] overflow-hidden" id="collection">
 
                 {slides[current].type === "image" ? (
                     <div
-                        className="absolute inset-0 bg-cover bg-center transition-all duration-700"
+                        key={current}
+                        className="absolute inset-0 w-full h-full bg-cover bg-center animate-fadeZoom"
                         style={{
                             backgroundImage: `url(${slides[current].src})`,
-                            backgroundSize: "cover",
                         }}
                     />
                 ) : (
                     <video
+                        key={current}
                         src={slides[current].src}
                         autoPlay
                         muted
                         loop
                         playsInline
-                        className="absolute w-full h-full object-cover"
+                         preload="none"
+                        className="absolute inset-0 w-full h-full object-cover animate-fadeZoom"
                     />
                 )}
 
-                <div className="absolute inset-0 bg-black/70" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
-                <div className="relative z-10 flex flex-col justify-center items-center text-center h-full px-6">
+                <div
+                    key={current + "-content"}
+                    className="absolute inset-0 flex flex-col items-center justify-end pb-24 px-6 text-center"
+                >
 
-                    <h2 className="text-5xl md:text-6xl font-bold">
+                    <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 animate-slide-up">
                         {slides[current].title}
                     </h2>
 
-                    <p className="mt-6 text-gray-300 max-w-xl">
+                    <p
+                        className="text-white/80 text-lg sm:text-xl max-w-xl mb-8 animate-fade-in"
+                        style={{ animationDelay: "0.3s" }}
+                    >
                         {slides[current].text}
                     </p>
 
-                    <button className="mt-10 bg-[#D4AF37] text-black px-10 py-3 rounded-full hover:bg-black hover:text-[#D4AF37] border border-transparent hover:border-[#D4AF37] transition">
+                    <button className="mt-10 bg-[#D4AF37] text-black px-10 py-3 rounded-full hover:bg-black hover:text-[#D4AF37] border border-transparent hover:border-[#D4AF37] transition duration-300 animate-fade-in"
+                        style={{ animationDelay: "0.6s" }}
+                    >
                         Voir la collection
                     </button>
 
                 </div>
 
                 {/* Indicators */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
                     {slides.map((_, index) => (
                         <div
                             key={index}
                             onClick={() => setCurrent(index)}
-                            className={`w-3 h-3 rounded-full cursor-pointer transition ${
-                                current === index ? "bg-[#D4AF37]" : "bg-white/40"
-                            }`}
+                            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${current === index ? "bg-[#D4AF37] scale-125" : "bg-white/40"
+                                }`}
                         />
                     ))}
                 </div>
 
             </section>
 
-   <section className="relative h-[100vh] overflow-hidden" id="About-us">
-        <div className="h-full w-full">
-             <div className="h-full md:w-full flex flex-col justify-center items-center bg-[#1a1a1a]">
-            <h2 className="text-4xl font-bold mt-15 text-[#D4AF37]">À propos de nous</h2>
-            <p className="text-center p-16 rounded-2xl  py-10 mt-15 shadow-2xl bg-black w-lg">Evahstore est une marque dédiée aux femmes qui aiment la simplicité chic.
-Des bijoux intemporels, des accessoires modernes et des perruques soigneusement sélectionnées pour compléter parfaitement votre beauté naturelle.</p>
-         </div>
-        </div>
-    </section>
+            <section className="py-30 px-4 sm:px-6 lg:px-8 bg-[#e4dede]">
+                <div className="max-w-4xl mx-auto text-center">
+                    <h2 className="font-display text-black text-3xl sm:text-4xl font-bold text-secondary-foreground mb-5 animate-slide-up">
+                        À propos de nous
+                    </h2>
+                    <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-5" />
+                    <p className="font-body text-gray-600 text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto animate-slide-up">
+                        Evahstore est une marque dédiée aux femmes qui aiment la simplicité chic.
+                        Des bijoux intemporels, des accessoires modernes et des perruques soigneusement
+                        sélectionnées pour compléter parfaitement votre beauté naturelle.
+                    </p>
+                </div>
+            </section>
 
             {/* PRODUITS */}
             <section className="px-8 py-20">
-                <h3 className="text-3xl font-bold text-center text-[#D4AF37] mb-14">
-                    fétiche et bracelet
+                <h3 className="text-3xl font-bold text-center text-[#000000] mb-5 animate-slide-up">
+                    Fétiche & Bracelet
                 </h3>
+                    <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-8" />
 
-                <div className="grid md:grid-cols-3 gap-10">
+                <div className="grid justify-center md:grid-cols-3  gap-10">
                     {products.map((product) => (
                         <div
                             key={product.id}
-                            className="bg-[#1A1A1A] rounded-3xl p-6 shadow-xl hover:shadow-[#D4AF37]/40 hover:scale-105 transition duration-300 relative"
+                            className="bg-[#fffefe] justify-center rounded-3xl   shadow-xl hover:shadow-[#D4AF37]/40   transition duration-300 relative"
                         >
                             {product.badge && (
-                                <span className="absolute top-4 left-4 bg-[#D4AF37] text-black text-xs px-3 py-1 rounded-full font-bold">
+                                <span
+                                    className={`absolute top-4 left-4 text-black text-xs px-3 py-1 rounded-full font-bold ${product.badge === "Nouveau"
+                                            ? "bg-[#D4AF37]"
+                                            : "bg-[#f51c1c]"
+                                        }`}
+                                >
                                     {product.badge}
                                 </span>
                             )}
@@ -380,132 +433,36 @@ Des bijoux intemporels, des accessoires modernes et des perruques soigneusement 
                             <img
                                 src={product.image}
                                 alt={product.name}
-                                className="rounded-xl w-full h-100 mb-5"
+                                className="rounded-xl w-100 group-hover:scale-105 transition-transform duration-700 hover:scale-105 an h-100 mb-5"
                             />
 
-                            <h4 className="text-xl font-semibold">{product.name}</h4>
+                            <h4 className="text-xl ml-5 font-semibold text-black">{product.name}</h4>
 
-                            <p className="text-[#D4AF37] font-bold mt-2 text-lg">
+                            <p className="text-[#D4AF37] ml-5 font-bold mt-2 text-lg">
                                 {product.price}
                             </p>
 
                             <button
                                 onClick={() => handleWhatsApp(product)}
-                                className="mt-6 w-full bg-[#D4AF37] text-black py-2 rounded-full font-semibold hover:bg-black hover:text-[#D4AF37] hover:border hover:border-[#D4AF37] transition duration-300"
+                                className="mt-6 w-full bg-[#D4AF37] text-black py-2 mb-5 rounded-full font-semibold hover:bg-black hover:text-[#D4AF37] hover:border hover:border-[#D4AF37] transition duration-300"
                             >
+                                <FaWhatsapp className="inline-block text-lg mb-1 mr-1" />
                                 Commander sur WhatsApp
                             </button>
                         </div>
                     ))}
 
-                    
+
                 </div>
                 <div className="flex  mt-15 w-full items-center justify-center">
-                        <h3 className="text-center text-[#D4AF37] font-bold"><Link to="/produits-montre">voir tous les produits</Link></h3>
-                    </div>
-            </section>
-<section className="relative h-[100vh]  overflow-hidden" id="collection">
-
-                {slides[current].type === "image" ? (
-                    <div
-                        className="absolute inset-0 bg-cover bg-center transition-all duration-700"
-                        style={{
-                            backgroundImage: `url(${slides[current].src})`,
-                            backgroundAttachment: "fixed",
-                            backgroundSize: "cover",
-                        }}
-                    />
-                ) : (
-                    <video
-                        src={slides[current].src}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        className="absolute w-full h-full object-cover"
-                    />
-                )}
-
-                <div className="absolute inset-0 bg-black/70" />
-
-                <div className="relative z-10 flex flex-col justify-center items-center text-center h-full px-6" id="accessoires">
-
-                    <h2 className="text-5xl md:text-6xl font-bold">
-                        {slides[current].title}
-                    </h2>
-
-                    <p className="mt-6 text-gray-300 max-w-xl">
-                        {slides[current].text}
-                    </p>
-
-                    <button className="mt-10 bg-[#D4AF37] text-black px-10 py-3 rounded-full hover:bg-black hover:text-[#D4AF37] border border-transparent hover:border-[#D4AF37] transition" >
-                        accessoires
-                    </button>
-
+                    <h3 className="text-center text-[#D4AF37] font-stretch-50% bg-transparent border border-[#D4AF37] py-2 px-4 rounded-4xl hover:text-[#fffefc] hover:bg-[#D4AF37] hover:border hover:border-[#D4AF37]  transition duration-300"><Link to="/produits-montre">voir tous les produits</Link></h3>
                 </div>
-
-                {/* Indicators */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
-                    {slides.map((_, index) => (
-                        <div
-                            key={index}
-                            onClick={() => setCurrent(index)}
-                            className={`w-3 h-3 rounded-full cursor-pointer transition ${
-                                current === index ? "bg-[#D4AF37]" : "bg-white/40"
-                            }`}
-                        />
-                    ))}
-                </div>
-
-            </section>
-            {/* PRODUITS */}
-            <section className="px-8 py-20">
-                <h3 className="text-3xl font-bold text-center text-[#D4AF37] mb-14">
-                    Nos Best Sellers
-                </h3>
-
-                <div className="grid md:grid-cols-3 gap-10">
-                    {products2.map((product) => (
-                        <div
-                            key={product.id}
-                            className="bg-[#1A1A1A] rounded-3xl p-6 shadow-xl hover:shadow-[#D4AF37]/40 hover:scale-105 transition duration-300 relative"
-                        >
-                            {product.badge && (
-                                <span className="absolute top-4 left-4 bg-[#D4AF37] text-black text-xs px-3 py-1 rounded-full font-bold">
-                                    {product.badge}
-                                </span>
-                            )}
-
-                            <img
-                                src={product.image}
-                                alt={product.name}
-                                className="rounded-xl w-full h-100 mb-5"
-                            />
-
-                            <h4 className="text-xl font-semibold">{product.name}</h4>
-
-                            <p className="text-[#D4AF37] font-bold mt-2 text-lg">
-                                {product.price}
-                            </p>
-
-                            <button
-                                onClick={() => handleWhatsApp(product)}
-                                className="mt-6 w-full bg-[#D4AF37] text-black py-2 rounded-full font-semibold hover:bg-black hover:text-[#D4AF37] hover:border hover:border-[#D4AF37] transition duration-300"
-                            >
-                                Commander sur WhatsApp
-                            </button>
-                        </div>
-                    ))}
-                </div>
-                <div className="flex  mt-15 w-full items-center justify-center">
-                        <h3 className="text-center text-[#D4AF37] font-bold"><Link to="/produits-bracelet ">voir tous les produits</Link></h3>
-                    </div>
             </section>
             <section className="relative h-[100vh]  overflow-hidden" id="collection">
 
                 {slides2[current1].type === "image" ? (
                     <div
-                        className="absolute inset-0 bg-cover bg-center transition-all duration-700"
+                        className="absolute inset-0 w-full h-full bg-cover bg-center animate-fadeZoom"
                         style={{
                             backgroundImage: `url(${slides2[current1].src})`,
                             backgroundAttachment: "fixed",
@@ -519,37 +476,150 @@ Des bijoux intemporels, des accessoires modernes et des perruques soigneusement 
                         muted
                         loop
                         playsInline
-                        className="absolute w-full h-full object-cover"
+                         preload="none"
+                        className="absolute inset-0 w-full h-full object-cover animate-fadeZoom"
                     />
                 )}
 
-                <div className="absolute inset-0 bg-black/70" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
-                <div className="relative z-10 flex flex-col justify-center items-center text-center h-full px-6" id="Blog">
+                <div key={current1 + "-content"} className="absolute inset-0 flex flex-col items-center justify-end pb-24 px-6 text-center" id="accessoires">
 
-                    <h2 className="text-5xl md:text-6xl font-bold">
+                    <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 animate-slideUp">
                         {slides2[current1].title}
                     </h2>
 
-                    <p className="mt-6 text-gray-300 max-w-xl">
+                    <p className="text-white/80 text-lg sm:text-xl max-w-xl mb-8 animate-fadeIn"
+                        style={{ animationDelay: "0.3s" }}>
                         {slides2[current1].text}
                     </p>
 
-                    <button className="mt-10 bg-[#D4AF37] text-black px-10 py-3 rounded-full hover:bg-black hover:text-[#D4AF37] border border-transparent hover:border-[#D4AF37] transition" id="accessoires">
+                    <button className="mt-10 bg-[#D4AF37] text-black px-10 py-3 rounded-full hover:bg-black hover:text-[#D4AF37] border border-transparent hover:border-[#D4AF37] transition duration-300 animate-fadeIn"
+                        style={{ animationDelay: "0.6s" }} >
+                        accessoires
+                    </button>
+
+                </div>
+
+                {/* Indicators */}
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 ">
+                    {slides.map((_, index) => (
+                        <div
+                            key={index}
+                            onClick={() => setCurrent1(index)}
+                            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${current1 === index ? "bg-[#D4AF37] scale-125" : "bg-white/40"
+                                }`}
+                        />
+                    ))}
+                </div>
+
+            </section>
+            {/* PRODUITS */}
+            <section className="px-8 py-20">
+                <h3 className="text-3xl font-bold text-center text-[#D4AF37] mb-5  animate-slide-up">
+                    Nos Best Sellers
+                </h3>
+              <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-5" />
+
+
+                <div className="grid justify-center md:grid-cols-3  gap-10">
+                    {products2.map((product) => (
+                        <div
+                            key={product.id}
+                            className="bg-[#fffefe] rounded-3xl animate-fadeup p shadow-xl hover:shadow-[#D4AF37]/40  transition duration-300 relative"
+                        >
+                            {product.badge && (
+                                <span
+                                    className={`absolute top-0 left-0 text-black text-xs px-3 py-1 rounded-full font-bold ${product.badge === "Nouveau"
+                                            ? "bg-[#D4AF37]"
+                                            : "bg-[#f51c1c]"
+                                        }`}
+                                >
+                                    {product.badge}
+                                </span>
+                            )}
+
+                            <img
+                                src={product.image}
+                                alt={product.name}
+                                className="rounded-xl w-100 h-100 mb-5 hover:scale-105 transition-transform duration-700"
+                            />
+
+                            <h4 className="text-xl font-semibold ml-5 text-black">{product.name}</h4>
+
+                            <p className="text-[#D4AF37] font-bold mt-2 ml-5 text-lg">
+                                {product.price}
+                            </p>
+
+                            <button
+                                onClick={() => handleWhatsApp(product)}
+                                className="mt-6 mb-5 w-full bg-[#D4AF37] text-black py-2 rounded-full font-semibold hover:bg-black hover:text-[#D4AF37] hover:border hover:border-[#D4AF37] transition duration-300"
+                            >
+                                <FaWhatsapp className="inline-block text-lg mr-1 mb-1" />
+                                Commander sur WhatsApp
+                            </button>
+                        </div>
+                    ))}
+                </div>
+                <div className="flex  mt-15 w-full items-center justify-center">
+                    <h3 className="text-center text-[#D4AF37] font-stretch-50% bg-transparent border border-[#D4AF37] py-2 px-4 rounded-4xl hover:text-[#fffefc] hover:bg-[#D4AF37] hover:border hover:border-[#D4AF37]  transition duration-300"><Link to="/produits-bracelet ">voir tous les produits</Link></h3>
+                </div>
+            </section>
+            <section className="relative h-[100vh]  overflow-hidden" id="collection">
+
+                {slides3[current2].type === "image" ? (
+                    <div
+                        key={current2}
+                        className="absolute inset-0 w-full h-full bg-cover bg-center animate-fadeZoom"
+                        style={{
+                            backgroundImage: `url(${slides3[current2].src})`,
+                            backgroundAttachment: "fixed",
+                            backgroundSize: "cover",
+                        }}
+                    />
+                ) : (
+                    <video
+                        key={current2}
+                        src={slides3[current2].src}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                         preload="none"
+                        className="absoluteabsolute inset-0 w-full h-full object-cover animate-fadeZoom "
+                    />
+                )}
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+                <div
+                    key={current2 + "-content"}
+                    className="absolute inset-0 flex flex-col items-center justify-end pb-24 px-6 text-center" id="Blog">
+
+                    <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 animate-slide-Up">
+                        {slides3[current2].title}
+                    </h2>
+
+                    <p className="text-white/80 text-lg sm:text-xl max-w-xl mb-8 animate-fade-In"
+                        style={{ animationDelay: "0.3s" }}>
+                        {slides3[current2].text}
+                    </p>
+
+                    <button className="mt-10 bg-[#D4AF37] text-black px-10 py-3 rounded-full hover:bg-black hover:text-[#D4AF37] border border-transparent hover:border-[#D4AF37] transition duration-300 animate-fadeIn" id="accessoires"
+                        style={{ animationDelay: "0.6s" }}>
                         Blog
                     </button>
 
                 </div>
 
                 {/* Indicators */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
-                    {slides2.map((_, index) => (
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+                    {slides3.map((_, index) => (
                         <div
                             key={index}
-                            onClick={() => setCurrent1(index)}
-                            className={`w-3 h-3 rounded-full cursor-pointer transition ${
-                                current1 === index ? "bg-[#D4AF37]" : "bg-white/40"
-                            }`}
+                            onClick={() => setCurrent2(index)}
+                            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${current2 === index ? "bg-[#D4AF37] scale-125" : "bg-white/40"
+                                }`}
                         />
                     ))}
                 </div>
@@ -558,61 +628,67 @@ Des bijoux intemporels, des accessoires modernes et des perruques soigneusement 
 
             {/* PRODUITS */}
             <section className="px-8 py-20">
-                <h3 className="text-3xl font-bold text-center text-[#D4AF37] mb-14">
-                    Nos Best Sellers
+                <h3 className="text-3xl font-bold text-center text-[#000000] mb-5">
+                    Perruques Premium
                 </h3>
-               <div className="flex mt-0 justify-center">
-                <hr className="border-r-8 border-white w-30 mb-8  my-0" />
-                 </div>
+                              <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-8" />
 
-                <div className="grid md:grid-cols-3 gap-10">
+
+                <div className="grid justify-center md:grid-cols-3 gap-10">
                     {products3.map((product) => (
-  <div
-    key={product.id}
-    className="bg-[#1A1A1A] rounded-3xl p-6 shadow-xl hover:shadow-[#D4AF37]/40 hover:scale-105 transition duration-300 relative"
-  >
-    {product.badge && (
-      <span className="absolute top-4 left-4 bg-[#D4AF37] text-black text-xs px-3 py-1 rounded-full font-bold">
-        {product.badge}
-      </span>
-    )}
+                        <div
+                            key={product.id}
+                            className="bg-[#f8f6f6] rounded-3xl  shadow-xl hover:shadow-[#D4AF37]/40 hover:scale-105 transition duration-300 relative"
+                        >
+                            {product.badge && (
+                                <span
+                                    className={`absolute top-0 left-0 text-black text-xs px-3 py-1 rounded-full font-bold ${product.badge === "Nouveau"
+                                            ? "bg-[#D4AF37]"
+                                            : "bg-[#f51c1c]"
+                                        }`}
+                                >
+                                    {product.badge}
+                                </span>
+                            )}
 
-    {/* IMAGE OU VIDEO */}
-    {product.image.endsWith(".mp4") ? (
-      <video
-        src={product.image}
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="rounded-xl mb-5 w-full h-130 object-cover"
-      />
-    ) : (
-      <img
-        src={product.image}
-        alt={product.name}
-        className="rounded-xl mb-5 w-full h-104 object-cover"
-      />
-    )}
+                            {/* IMAGE OU VIDEO */}
+                            {product.image.endsWith(".mp4") ? (
+                                <video
+                                    src={product.image}
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                     preload="none"
+                                    className="rounded-xl mb-5 w-100 h-130 object-cover"
+                                />
+                            ) : (
+                                <img
+                                    src={product.image}
+                                    alt={product.name}
+                                    className="rounded-xl mb-5 w-full h-104 object-cover"
+                                />
+                            )}
 
-    <h4 className="text-xl font-semibold">{product.name}</h4>
+                            <h4 className="text-xl font-semibold ml-5 text-black">{product.name}</h4>
 
-    <p className="text-[#D4AF37] font-bold mt-2 text-lg">
-      {product.price}
-    </p>
+                            <p className="text-[#D4AF37] ml-5 font-bold mt-2 text-lg">
+                                {product.price}
+                            </p>
 
-    <button
-      onClick={() => handleWhatsApp(product)}
-      className="mt-6 w-full bg-[#D4AF37] text-black py-2 rounded-full font-semibold hover:bg-black hover:text-[#D4AF37] hover:border hover:border-[#D4AF37] transition duration-300"
-    >
-      Commander sur WhatsApp
-    </button>
-  </div>
-))}
+                            <button
+                                onClick={() => handleWhatsApp(product)}
+                                className="mt-6 mb-5 w-full bg-[#D4AF37] text-black py-2 rounded-full font-semibold hover:bg-black hover:text-[#D4AF37] hover:border hover:border-[#D4AF37] transition duration-300"
+                            >
+                                <FaWhatsapp className="inline-block text-lg mr-1 mb-1" />
+                                Commander sur WhatsApp
+                            </button>
+                        </div>
+                    ))}
                 </div>
                 <div className="flex  mt-15 w-full items-center justify-center">
-                        <h3 className="text-center text-[#D4AF37] font-bold"><Link to="/produits-perruque">voir tous les produits</Link></h3>
-                    </div>
+                    <button className="text-center text-[#D4AF37] font-stretch-50% bg-transparent border border-[#D4AF37] py-2 px-4 rounded-4xl hover:text-[#fffefc] hover:bg-[#D4AF37] hover:border hover:border-[#D4AF37]  transition duration-300"><Link to="/produits-perruque">voir tous les produits</Link></button>
+                </div>
             </section>
 
             {/* WHATSAPP FLOATING BUTTON */}
@@ -622,12 +698,12 @@ Des bijoux intemporels, des accessoires modernes et des perruques soigneusement 
                 rel="noopener noreferrer"
                 className="fixed bottom-6 right-6 bg-green-400 text-black px-5 py-3 rounded-full shadow-lg font-bold hover:bg-green-600 transition"
             >
-              <FaWhatsapp className="text-3xl text-white rounded-full" />
+                <FaWhatsapp className="text-3xl text-white rounded-full" />
             </a>
 
             {/* FOOTER */}
             <footer className="bg-black border-t border-[#D4AF37]/30 p-3  py-10">
-<div className="flex flex-col md:flex-row justify-around items-center md:items-start gap-10">                    <div className="flex flex-col">
+                <div className="flex flex-col md:flex-row justify-around items-center md:items-start gap-10">                    <div className="flex flex-col">
                     <p className="text-[#D4AF37] text-2xl font-semibold ">
                         EvahStore
                     </p>
@@ -644,25 +720,26 @@ Des bijoux intemporels, des accessoires modernes et des perruques soigneusement 
                         </a>
 
                     </div>
-                    </div>
+                </div>
 
                     <div>
-                        <p className="text-2xl font-semibold">About us</p>
-                       
+                        <p className="text-2xl text-center font-semibold">About us</p>
+                        <p className="text-center text-gray-400">Marque dédiée à la beauté et à l'élégance féminine.</p>
+
                     </div>
 
                     <div>
                         <p className="text-2xl font-semibold">contact us</p>
                         <p className="text-gray-400 text-center">786632036</p>
-                       
+
                     </div>
                 </div>
                 <div className="flex justify-center">
-                <hr className="border-r-8 border-gray-700  w-md my-3" />
-                 </div>
-                 <p className="text-gray-400 mt-4 text-center">
-                            © 2026 EvahStore. Tous droits réservés.
-                        </p>
+                    <hr className="border-r-8 border-gray-700  w-md my-3" />
+                </div>
+                <p className="text-gray-400 mt-4 text-center">
+                    © 2026 EvahStore. Tous droits réservés.
+                </p>
                 <p className="text-gray-400 mt-2 text-center">
                     Livraison rapide • Paiement à la livraison • Disponible 7j/7
                 </p>

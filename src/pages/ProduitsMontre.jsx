@@ -1,4 +1,7 @@
 import react from "react";
+import { FaWhatsapp } from "react-icons/fa"
+import { IoArrowBackCircle } from "react-icons/io5";
+;
 import { Link } from "react-router-dom";
 export default function ProduitsMontre() {
     const products2 = [
@@ -49,26 +52,31 @@ export default function ProduitsMontre() {
 
 
     return (
-        <div className="min-h-screen flex flex-col justify-center bg-[#0F0F0F]">
-            <h1 className="text-4xl mt-5 font-bold text-center text-[#D4AF37]">Page des Bracelets</h1>
+        <div className="min-h-screen flex flex-col justify-center bg-[#f0eeee]">
             <section className="px-8 py-20">
-                <h3 className="text-3xl font-bold text-center text-[#D4AF37] mb-14">
-                    Nos Best Sellers
-                </h3>
-                                <p className="text-center text-white mb-10"> <Link to="/home">retour</Link></p>
-                
-                <div className="flex mt-0 justify-center">
-                    <hr className="border-r-8 border-white w-30 mb-8  my-0" />
-                </div>
+                                <p className="text-start text-xl text-black mb-10"> <IoArrowBackCircle className="absolute left-2 mt-1 text-2xl" /> <Link to="/home">retour</Link></p>
 
-                <div className="grid md:grid-cols-3 gap-10">
+                <h3 className="text-3xl font-bold text-center text-[#000000] mb-5">
+                    Fétiche & Bracelet
+                </h3>
+                                                    <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-8" />
+
+                
+
+
+                <div className="grid justify-center md:grid-cols-3 gap-10">
                     {products2.map((product) => (
                         <div
                             key={product.id}
-                            className="bg-[#1A1A1A] rounded-3xl p-6 shadow-xl hover:shadow-[#D4AF37]/40 hover:scale-105 transition duration-300 relative"
+                            className="bg-[#fffefe] rounded-3xl p-0 shadow-xl hover:shadow-[#D4AF37]/40 hover:scale-105 transition duration-300 relative"
                         >
-                            {product.badge && (
-                                <span className="absolute top-4 left-4 bg-[#D4AF37] text-black text-xs px-3 py-1 rounded-full font-bold">
+                           {product.badge && (
+                                <span
+                                    className={`absolute top-4 left-4 text-black text-xs px-3 py-1 rounded-full font-bold ${product.badge === "Nouveau"
+                                            ? "bg-[#D4AF37]"
+                                            : "bg-[#f51c1c]"
+                                        }`}
+                                >
                                     {product.badge}
                                 </span>
                             )}
@@ -87,20 +95,21 @@ export default function ProduitsMontre() {
                                 <img
                                     src={product.image}
                                     alt={product.name}
-                                    className="rounded-xl mb-5 w-full h-104 object-cover"
+                                    className="rounded-xl mb-5 w-100rounded-xl w-100 group-hover:scale-105 transition-transform duration-700 hover:scale-105  h-100 "
                                 />
                             )}
 
-                            <h4 className="text-xl font-semibold text-white">{product.name}</h4>
+                            <h4 className="text-xl ml-5 text-black font-semibold">{product.name}</h4>
 
-                            <p className="text-[#D4AF37] font-bold mt-2 text-lg">
+                            <p className="text-[#D4AF37] ml-5 font-bold mt-2 text-lg">
                                 {product.price}
                             </p>
 
                             <button
                                 onClick={() => handleWhatsApp(product)}
-                                className="mt-6 w-full bg-[#D4AF37] text-black py-2 rounded-full font-semibold hover:bg-black hover:text-[#D4AF37] hover:border hover:border-[#D4AF37] transition duration-300"
+                                className="mt-6 w-full bg-[#D4AF37] text-black py-2 mb-3 rounded-full font-semibold hover:bg-black hover:text-[#D4AF37] hover:border hover:border-[#D4AF37] transition duration-300"
                             >
+                                <FaWhatsapp className="inline-block text-lg mr-1 mb-1" />
                                 Commander sur WhatsApp
                             </button>
                         </div>
