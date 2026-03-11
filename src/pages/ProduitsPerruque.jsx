@@ -1,4 +1,6 @@
 import react from "react";
+import React, { useState, useEffect } from "react";
+
 import { Link } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import { IoArrowBackCircle } from "react-icons/io5";
@@ -12,85 +14,57 @@ export default function ProduitsPerruque() {
             "_blank"
         );
     };
+    const [perruques, setPerruques] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    
+
+    useEffect(() => {
+            const fetchData = async () => {
+                try {
+                    setLoading(true);
+    
+                    // On utilise l'URL de l'API depuis l'environnement
+                    const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
+                    const response = await fetch(`${API_URL}/products?category=perruque`);
+    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+    
+                    const data = await response.json();
+                    setPerruques(data);
+                } catch (err) {
+                    setError(err.message || "Une erreur est survenue");
+                } finally {
+                    setLoading(false);
+                }
+            };
+    
+            fetchData();
+        }, []);
+
+     if (loading) return <div className="p-6 text-center">Chargement...</div>;
+  if (error)
+    return (
+      <div className="p-6 bg-red-50 border border-red-200 rounded-xl text-red-600">
+        ⚠️ Erreur : {error}
+      </div>
+    );
 
 
-    const products3 = [
-        {
-            id: 1,
-            name: "Montre Élégance Or",
-            price: "15 000 FCFA",
-            image: "/video/video-perruque1.mp4",
-            badge: "Nouveau",
-        },
-        {
-            id: 2,
-            name: "Collier Queen Gold",
-            price: "8 000 FCFA",
-            image: "/video/video-perruque2.mp4",
-            badge: "",
-        },
-        {
-            id: 3,
-            name: "Perruque Luxe Wave",
-            price: "35 000 FCFA",
-            image: "/video/video-perruque3.mp4",
-            badge: "Promo",
-        },
-        {
-            id: 4,
-            name: "Montre Élégance Or",
-            price: "15 000 FCFA",
-            image: "/video/video-perruque4.mp4",
-            badge: "Nouveau",
-        },
-        {
-            id: 5,
-            name: "Collier Queen Gold",
-            price: "8 000 FCFA",
-            image: "/video/video-perruque5.mp4",
-            badge: "",
-        },
-        {
-            id: 6,
-            name: "Perruque Luxe Wave",
-            price: "35 000 FCFA",
-            image: "/video/video-perruque6.mp4",
-            badge: "Promo",
-        },
-        {
-            id: 7,
-            name: "Perruque Luxe Wave",
-            price: "35 000 FCFA",
-            image: "/video/video-perruque7.mp4",
-            badge: "Promo",
-        },
-        {
-            id: 8,
-            name: "Perruque Luxe Wave",
-            price: "35 000 FCFA",
-            image: "/video/video-perruque8.mp4",
-            badge: "Promo",
-        },
-        {
-            id: 9,
-            name: "Perruque Luxe Wave",
-            price: "35 000 FCFA",
-            image: "/video/video-perruque9.mp4",
-            badge: "Promo",
-        }
-    ];
     return (
         <div className="min-h-screen flex flex-col justify-center bg-[#f0eeee]">
             <section className="px-8 py-20">
-                                <p className="text-start text-xl text-black mb-10"> <IoArrowBackCircle  className="absolute left-2 mt-1 text-2xl"/> <Link to="/home">retour</Link></p>
+                <p className="text-start text-xl text-black mb-10"> <IoArrowBackCircle className="absolute left-2 mt-1 text-2xl" /> <Link to="/home">retour</Link></p>
 
                 <h3 className="text-3xl font-bold text-center text-[#000000] mb-14">
                     Perruques Premium
                 </h3>
-                
+
 
                 <div className="grid justify-center md:grid-cols-3 gap-10">
-                    {products3.map((product) => (
+                    {perruques.map((product) => (
                         <div
                             key={product.id}
                             className="bg-[#ffffff] rounded-3xl p-0 shadow-xl hover:shadow-[#D4AF37]/40 hover:scale-105 transition duration-300 relative"
@@ -98,8 +72,8 @@ export default function ProduitsPerruque() {
                             {product.badge && (
                                 <span
                                     className={`absolute top-4 left-4 text-black text-xs px-3 py-1 rounded-full font-bold ${product.badge === "Nouveau"
-                                            ? "bg-[#D4AF37]"
-                                            : "bg-[#f51c1c]"
+                                        ? "bg-[#D4AF37]"
+                                        : "bg-[#f51c1c]"
                                         }`}
                                 >
                                     {product.badge}
@@ -107,24 +81,23 @@ export default function ProduitsPerruque() {
                             )}
 
                             {/* IMAGE OU VIDEO */}
-                            {product.image.endsWith(".mp4") ? (
+                            {product.is_video ? (
                                 <video
-                                    src={product.image}
+                                    src={product.image_url}
                                     autoPlay
                                     muted
                                     loop
                                     playsInline
-
-
-                                    className="rounded-xl mb-5 w-100 h-130 object-cover"
+                                    className="rounded-xl w-100 h-100 mb-5 object-cover hover:scale-105 transition-transform duration-700"
                                 />
                             ) : (
                                 <img
-                                    src={product.image}
+                                    src={product.image_url}
                                     alt={product.name}
-                                    className="rounded-xl w-100 group-hover:scale-105 transition-transform duration-700 hover:scale-105 an h-100 mb-5"
+                                    className="rounded-xl w-100 h-100 mb-5 object-cover hover:scale-105 transition-transform duration-700"
                                 />
                             )}
+
 
                             <h4 className="text-xl font-semibold ml-5 text-black">{product.name}</h4>
 

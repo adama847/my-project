@@ -5,149 +5,55 @@ import { Menu, X } from "lucide-react";
 import img from "../assets/img/Evahh.jpeg";
 import { FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
+
 export default function Home() {
 
 
 
     const phoneNumber = "221786632036";
 
-    const products = [
-        {
-            id: 1,
-            name: "Montre Élégance Or",
-            price: "15 000 FCFA",
-            image: "https://i.pinimg.com/1200x/4f/f7/ea/4ff7ea7fcccb5374e1edb6457936c30d.jpg",
-            badge: "Nouveau",
-        },
-        {
-            id: 2,
-            name: "Collier Queen Gold",
-            price: "8 000 FCFA",
-            image: "https://i.pinimg.com/736x/fd/5a/4c/fd5a4c9f89a25b1d5f1e4d50801ace17.jpg",
-            badge: "",
-        },
-        {
-            id: 3,
-            name: "Perruque Luxe Wave",
-            price: "35 000 FCFA",
-            image: "https://i.pinimg.com/736x/a6/1b/9e/a61b9edd36c14fe473e08d33258848ab.jpg",
-            badge: "Promo",
-        },
-        {
-            id: 4,
-            name: "Montre Élégance Or",
-            price: "15 000 FCFA",
-            image: "https://i.pinimg.com/1200x/82/b3/9c/82b39c7533883fee651ce222749a4237.jpg",
-            badge: "Nouveau",
-        },
-        {
-            id: 5,
-            name: "Collier Queen Gold",
-            price: "8 000 FCFA",
-            image: "https://i.pinimg.com/736x/72/40/5f/72405f7620a918959665677e45b8ad7c.jpg",
-            badge: "",
-        },
-        {
-            id: 6,
-            name: "Perruque Luxe Wave",
-            price: "35 000 FCFA",
-            image: "https://i.pinimg.com/736x/f1/e4/39/f1e43910448bdcf7f783ffb36a5b00ad.jpg",
-            badge: "Promo",
+  const [bracelets, setBracelets] = useState([]);
+const [bestSellers, setBestSellers] = useState([]);
+const [perruques, setPerruques] = useState([]);
+
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+
+useEffect(() => {
+    const fetchData = async () => {
+        try {
+            setLoading(true);
+
+            const API_URL = import.meta.env.VITE_API_URL;
+
+            const [braceletRes, bestSellerRes, perruqueRes] = await Promise.all([
+                fetch(`${API_URL}/products?category=bracelet`),
+                fetch(`${API_URL}/products?category=bestseller`),
+                fetch(`${API_URL}/products?category=perruque`)
+            ]);
+
+            if (!braceletRes.ok || !bestSellerRes.ok || !perruqueRes.ok) {
+                throw new Error("Erreur lors du chargement des produits");
+            }
+
+            const braceletData = await braceletRes.json();
+            const bestSellerData = await bestSellerRes.json();
+            const perruqueData = await perruqueRes.json();
+
+            setBracelets(braceletData);
+            setBestSellers(bestSellerData);
+            setPerruques(perruqueData);
+
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
         }
-    ];
+    };
 
-    const products2 = [
-        {
-            id: 1,
-            name: "Montre Élégance Or",
-            price: "15 000 FCFA",
-            image: "https://i.pinimg.com/1200x/fe/20/a3/fe20a3e9e2a80854d19d6083833c1351.jpg",
-            badge: "Nouveau",
-        },
-        {
-            id: 2,
-            name: "Collier Queen Gold",
-            price: "8 000 FCFA",
-            image: "https://i.pinimg.com/736x/1b/e6/bd/1be6bd532e42e365677e8a819ef4a565.jpg",
-            badge: "",
-        },
-        {
-            id: 3,
-            name: "Perruque Luxe Wave",
-            price: "35 000 FCFA",
-            image: "https://i.pinimg.com/736x/f4/43/de/f443de3308bfe234d2d59e0946d5851f.jpg",
-            badge: "Promo",
-        },
-        {
-            id: 4,
-            name: "Montre Élégance Or",
-            price: "15 000 FCFA",
-            image: "https://i.pinimg.com/736x/f8/62/35/f862356e618cc50de91703d617ebc70a.jpg",
-            badge: "Nouveau",
-        },
-        {
-            id: 5,
-            name: "Collier Queen Gold",
-            price: "8 000 FCFA",
-            image: "https://i.pinimg.com/736x/01/bd/51/01bd51635ee667d3753ef67689627ced.jpg",
-            badge: "",
-        },
-        {
-            id: 6,
-            name: "Perruque Luxe Wave",
-            price: "35 000 FCFA",
-            image: "https://i.pinimg.com/736x/5e/7e/d5/5e7ed5289db06bb5fd1d716e8f657437.jpg",
-            badge: "Promo",
-        }
-    ];
-
-
-    const products3 = [
-        {
-            id: 1,
-            name: "Montre Élégance Or",
-            price: "15 000 FCFA",
-            image: "/video/video-perruque1.mp4",
-            badge: "Nouveau",
-        },
-        {
-            id: 2,
-            name: "Collier Queen Gold",
-            price: "8 000 FCFA",
-            image: "/video/video-perruque2.mp4",
-            badge: "",
-        },
-        {
-            id: 3,
-            name: "Perruque Luxe Wave",
-            price: "35 000 FCFA",
-            image: "/video/video-perruque3.mp4",
-            badge: "Promo",
-        },
-        {
-            id: 4,
-            name: "Montre Élégance Or",
-            price: "15 000 FCFA",
-            image: "/video/video-perruque4.mp4",
-            badge: "Nouveau",
-        },
-        {
-            id: 5,
-            name: "Collier Queen Gold",
-            price: "8 000 FCFA",
-            image: "/video/video-perruque5.mp4",
-            badge: "",
-        },
-        {
-            id: 6,
-            name: "Perruque Luxe Wave",
-            price: "35 000 FCFA",
-            image: "/video/video-perruque6.mp4",
-            badge: "Promo",
-        },
-
-    ];
-
+    fetchData();
+}, []);
+    
 
     const slides = [
         {
@@ -232,7 +138,7 @@ export default function Home() {
             text: "Perruques premium pour une allure irrésistible."
         }
     ];
-
+ 
 
     const [current1, setCurrent1] = useState(0);
 
@@ -261,6 +167,13 @@ export default function Home() {
         );
     };
 
+    if (loading) return <div className="p-6 text-center">Chargement...</div>;
+  if (error)
+    return (
+      <div className="p-6 bg-red-50 border border-red-200 rounded-xl text-red-600">
+        ⚠️ Erreur : {error}
+      </div>
+    );
 
     return (
         <div className="bg-[#f0eeee] min-h-screen text-white">
@@ -272,7 +185,7 @@ export default function Home() {
                     {/* LOGO */}
                     <div className="flex items-center gap-3">
                         <img src={img} alt="Logo" className="w-10 h-10 rounded-full" />
-                        <h1 className=" sm:text-2xl font-stretch-50% text-[#D4AF37] text-4xl text-gold-gradient animate-gold tracking-widest">
+                        <h1 className=" sm:text-2xl font-extralight text-[#D4AF37] text-4xl text-gold-gradient animate-gold tracking-widest">
                             EvahStore
                         </h1>
                     </div>
@@ -347,7 +260,7 @@ export default function Home() {
                         muted
                         loop
                         playsInline
-                         preload="none"
+                        preload="none"
                         className="absolute inset-0 w-full h-full object-cover animate-fadeZoom"
                     />
                 )}
@@ -411,10 +324,10 @@ export default function Home() {
                 <h3 className="text-3xl font-bold text-center text-[#000000] mb-5 animate-slide-up">
                     Fétiche & Bracelet
                 </h3>
-                    <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-8" />
+                <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-8" />
 
                 <div className="grid justify-center md:grid-cols-3  gap-10">
-                    {products.map((product) => (
+                    {bracelets.map((product) => (
                         <div
                             key={product.id}
                             className="bg-[#fffefe] justify-center rounded-3xl   shadow-xl hover:shadow-[#D4AF37]/40   transition duration-300 relative"
@@ -422,19 +335,30 @@ export default function Home() {
                             {product.badge && (
                                 <span
                                     className={`absolute top-4 left-4 text-black text-xs px-3 py-1 rounded-full font-bold ${product.badge === "Nouveau"
-                                            ? "bg-[#D4AF37]"
-                                            : "bg-[#f51c1c]"
+                                        ? "bg-[#D4AF37]"
+                                        : "bg-[#f51c1c]"
                                         }`}
                                 >
                                     {product.badge}
                                 </span>
                             )}
 
-                            <img
-                                src={product.image}
-                                alt={product.name}
-                                className="rounded-xl w-100 group-hover:scale-105 transition-transform duration-700 hover:scale-105 an h-100 mb-5"
-                            />
+                            {product.is_video ? (
+                                <video
+                                    src={product.image_url}
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                    className="rounded-xl w-100 h-100 mb-5 object-cover hover:scale-105 transition-transform duration-700"
+                                />
+                            ) : (
+                                <img
+                                    src={product.image_url}
+                                    alt={product.name}
+                                    className="rounded-xl w-100 h-100 mb-5 object-cover hover:scale-105 transition-transform duration-700"
+                                />
+                            )}
 
                             <h4 className="text-xl ml-5 font-semibold text-black">{product.name}</h4>
 
@@ -476,7 +400,7 @@ export default function Home() {
                         muted
                         loop
                         playsInline
-                         preload="none"
+                        preload="none"
                         className="absolute inset-0 w-full h-full object-cover animate-fadeZoom"
                     />
                 )}
@@ -519,31 +443,32 @@ export default function Home() {
                 <h3 className="text-3xl font-bold text-center text-[#D4AF37] mb-5  animate-slide-up">
                     Nos Best Sellers
                 </h3>
-              <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-5" />
+                <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-5" />
 
 
                 <div className="grid justify-center md:grid-cols-3  gap-10">
-                    {products2.map((product) => (
+                    {bestSellers.map((product) => (
                         <div
                             key={product.id}
                             className="bg-[#fffefe] rounded-3xl animate-fadeup p shadow-xl hover:shadow-[#D4AF37]/40  transition duration-300 relative"
                         >
-                            {product.badge && (
-                                <span
-                                    className={`absolute top-0 left-0 text-black text-xs px-3 py-1 rounded-full font-bold ${product.badge === "Nouveau"
-                                            ? "bg-[#D4AF37]"
-                                            : "bg-[#f51c1c]"
-                                        }`}
-                                >
-                                    {product.badge}
-                                </span>
+                               {product.is_video ? (
+                                <video
+                                    src={product.image_url}
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                    className="rounded-xl w-100 h-100 mb-5 object-cover hover:scale-105 transition-transform duration-700"
+                                />
+                            ) : (
+                                <img
+                                    src={product.image_url}
+                                    alt={product.name}
+                                    className="rounded-xl w-100 h-100 mb-5 object-cover hover:scale-105 transition-transform duration-700"
+                                />
                             )}
 
-                            <img
-                                src={product.image}
-                                alt={product.name}
-                                className="rounded-xl w-100 h-100 mb-5 hover:scale-105 transition-transform duration-700"
-                            />
 
                             <h4 className="text-xl font-semibold ml-5 text-black">{product.name}</h4>
 
@@ -585,8 +510,8 @@ export default function Home() {
                         muted
                         loop
                         playsInline
-                         preload="none"
-                        className="absoluteabsolute inset-0 w-full h-full object-cover animate-fadeZoom "
+                        preload="none"
+                        className="absolute inset-0 w-full h-full object-cover animate-fadeZoom "
                     />
                 )}
 
@@ -631,11 +556,11 @@ export default function Home() {
                 <h3 className="text-3xl font-bold text-center text-[#000000] mb-5">
                     Perruques Premium
                 </h3>
-                              <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-8" />
+                <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-8" />
 
 
                 <div className="grid justify-center md:grid-cols-3 gap-10">
-                    {products3.map((product) => (
+                    {perruques.map((product) => (
                         <div
                             key={product.id}
                             className="bg-[#f8f6f6] rounded-3xl  shadow-xl hover:shadow-[#D4AF37]/40 hover:scale-105 transition duration-300 relative"
@@ -643,8 +568,8 @@ export default function Home() {
                             {product.badge && (
                                 <span
                                     className={`absolute top-0 left-0 text-black text-xs px-3 py-1 rounded-full font-bold ${product.badge === "Nouveau"
-                                            ? "bg-[#D4AF37]"
-                                            : "bg-[#f51c1c]"
+                                        ? "bg-[#D4AF37]"
+                                        : "bg-[#f51c1c]"
                                         }`}
                                 >
                                     {product.badge}
@@ -652,23 +577,23 @@ export default function Home() {
                             )}
 
                             {/* IMAGE OU VIDEO */}
-                            {product.image.endsWith(".mp4") ? (
+                            {product.is_video ? (
                                 <video
-                                    src={product.image}
+                                    src={product.image_url}
                                     autoPlay
                                     muted
                                     loop
                                     playsInline
-                                     preload="none"
-                                    className="rounded-xl mb-5 w-100 h-130 object-cover"
+                                    className="rounded-xl w-100 h-100 mb-5 object-cover hover:scale-105 transition-transform duration-700"
                                 />
                             ) : (
                                 <img
-                                    src={product.image}
+                                    src={product.image_url}
                                     alt={product.name}
-                                    className="rounded-xl mb-5 w-full h-104 object-cover"
+                                    className="rounded-xl w-100 h-100 mb-5 object-cover hover:scale-105 transition-transform duration-700"
                                 />
                             )}
+
 
                             <h4 className="text-xl font-semibold ml-5 text-black">{product.name}</h4>
 
