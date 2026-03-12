@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { FaInstagramSquare, FaFacebook } from "react-icons/fa";
 import { AiFillTikTok } from "react-icons/ai";
 import { Menu, X } from "lucide-react";
@@ -24,8 +24,7 @@ useEffect(() => {
         try {
             setLoading(true);
 
-            const API_URL = import.meta.env.VITE_API_URL;
-console.log("API URL:", API_URL);
+            const API_URL = import.meta.env.VITE_API_URL|| "http://127.0.0.1:8000/api";
             const [braceletRes, bestSellerRes, perruqueRes] = await Promise.all([
                 fetch(`${API_URL}/products?category=bracelet`),
                 fetch(`${API_URL}/products?category=bestseller`),
