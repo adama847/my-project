@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaInstagramSquare, FaFacebook } from "react-icons/fa";
 import { AiFillTikTok } from "react-icons/ai";
 import { Menu, X } from "lucide-react";
@@ -12,47 +12,58 @@ export default function Home() {
 
     const phoneNumber = "221786632036";
 
-  const [bracelets, setBracelets] = useState([]);
-const [bestSellers, setBestSellers] = useState([]);
-const [perruques, setPerruques] = useState([]);
+    const [bracelets, setBracelets] = useState([]);
+    const [bestSellers, setBestSellers] = useState([]);
+    const [perruques, setPerruques] = useState([]);
 
-const [loading, setLoading] = useState(true);
-const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-useEffect(() => {
-    const fetchData = async () => {
-        try {
-            setLoading(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 6;
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentbracelets = bracelets.slice(indexOfFirstProduct, indexOfLastProduct);
+    const currentBestSellers = bestSellers.slice(indexOfFirstProduct, indexOfLastProduct);
+    const currentPerruques = perruques.slice(indexOfFirstProduct, indexOfLastProduct);
+    const totalPages = Math.ceil(bracelets.length / productsPerPage);
+    const totalBestSellerPages = Math.ceil(bestSellers.length / productsPerPage);
+    const totalPerruquePages = Math.ceil(perruques.length / productsPerPage);
 
-            const API_URL = import.meta.env.VITE_API_URL|| "http://127.0.0.1:8000/api";
-            const [braceletRes, bestSellerRes, perruqueRes] = await Promise.all([
-                fetch(`${API_URL}/products?category=bracelet`),
-                fetch(`${API_URL}/products?category=bestseller`),
-                fetch(`${API_URL}/products?category=perruque`)
-            ]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setLoading(true);
 
-            if (!braceletRes.ok || !bestSellerRes.ok || !perruqueRes.ok) {
-                throw new Error("Erreur lors du chargement des produits");
+                const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
+                const [braceletRes, bestSellerRes, perruqueRes] = await Promise.all([
+                    fetch(`${API_URL}/products?category=bracelet`),
+                    fetch(`${API_URL}/products?category=bestseller`),
+                    fetch(`${API_URL}/products?category=perruque`)
+                ]);
+
+                if (!braceletRes.ok || !bestSellerRes.ok || !perruqueRes.ok) {
+                    throw new Error("Erreur lors du chargement des produits");
+                }
+
+                const braceletData = await braceletRes.json();
+                const bestSellerData = await bestSellerRes.json();
+                const perruqueData = await perruqueRes.json();
+
+                setBracelets(braceletData);
+                setBestSellers(bestSellerData);
+                setPerruques(perruqueData);
+
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
             }
+        };
 
-            const braceletData = await braceletRes.json();
-            const bestSellerData = await bestSellerRes.json();
-            const perruqueData = await perruqueRes.json();
+        fetchData();
+    }, []);
 
-            setBracelets(braceletData);
-            setBestSellers(bestSellerData);
-            setPerruques(perruqueData);
-
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    fetchData();
-}, []);
-    
 
     const slides = [
         {
@@ -137,7 +148,7 @@ useEffect(() => {
             text: "Perruques premium pour une allure irrésistible."
         }
     ];
- 
+
 
     const [current1, setCurrent1] = useState(0);
 
@@ -167,12 +178,12 @@ useEffect(() => {
     };
 
     if (loading) return <div className="p-6 text-center">Chargement...</div>;
-  if (error)
-    return (
-      <div className="p-6 bg-red-50 border border-red-200 rounded-xl text-red-600">
-        ⚠️ Erreur : {error}
-      </div>
-    );
+    if (error)
+        return (
+            <div className="p-6 bg-red-50 border border-red-200 rounded-xl text-red-600">
+                ⚠️ Erreur : {error}
+            </div>
+        );
 
     return (
         <div className="bg-[#f0eeee] min-h-screen text-white">
@@ -326,10 +337,10 @@ useEffect(() => {
                 <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-8" />
 
                 <div className="grid justify-center md:grid-cols-3  gap-10">
-                    {bracelets.map((product) => (
+                    {currentbracelets.map((product) => (
                         <div
                             key={product.id}
-                            className="bg-[#fffefe] justify-center rounded-3xl   shadow-xl hover:shadow-[#D4AF37]/40   transition duration-300 relative"
+                            className="bg-[#fffefe] justify-center rounded-3xl p-0 shadow-xl hover:shadow-[#D4AF37]/40   transition duration-300 relative"
                         >
                             {product.badge && (
                                 <span
@@ -374,7 +385,30 @@ useEffect(() => {
                             </button>
                         </div>
                     ))}
+                    
 
+                </div>
+                 <div className="flex justify-center items-center gap-4 mt-10">
+
+                    <button
+                        disabled={currentPage === 1}
+                        onClick={() => setCurrentPage(currentPage - 1)}
+                        className="px-4 py-2 bg-[#D4AF37] rounded disabled:opacity-50"
+                    >
+                        Précédent
+                    </button>
+
+                    <span className="font-semibold text-black">
+                        Page {currentPage} / {totalPages}
+                    </span>
+
+                    <button
+                        disabled={currentPage === totalPages}
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                        className="px-4 py-2 bg-[#D4AF37] rounded text-black disabled:opacity-50"
+                    >
+                        Suivant
+                    </button>
 
                 </div>
                 <div className="flex  mt-15 w-full items-center justify-center">
@@ -446,12 +480,12 @@ useEffect(() => {
 
 
                 <div className="grid justify-center md:grid-cols-3  gap-10">
-                    {bestSellers.map((product) => (
+                    {currentBestSellers.map((product) => (
                         <div
                             key={product.id}
-                            className="bg-[#fffefe] rounded-3xl animate-fadeup p shadow-xl hover:shadow-[#D4AF37]/40  transition duration-300 relative"
+                            className="bg-[#fffefe] rounded-3xl animate-fadeup p-0 shadow-xl hover:shadow-[#D4AF37]/40  transition duration-300 relative"
                         >
-                               {product.is_video ? (
+                            {product.is_video ? (
                                 <video
                                     src={product.image_url}
                                     autoPlay
@@ -484,6 +518,30 @@ useEffect(() => {
                             </button>
                         </div>
                     ))}
+                     
+                </div>
+                <div className="flex justify-center items-center gap-4 mt-10">
+
+                    <button
+                        disabled={currentPage === 1}
+                        onClick={() => setCurrentPage(currentPage - 1)}
+                        className="px-4 py-2 bg-[#D4AF37] rounded disabled:opacity-50"
+                    >
+                        Précédent
+                    </button>
+
+                    <span className="font-semibold text-black">
+                        Page {currentPage} / {totalPages}
+                    </span>
+
+                    <button
+                        disabled={currentPage === totalPages}
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                        className="px-4 py-2 bg-[#D4AF37] rounded text-black disabled:opacity-50"
+                    >
+                        Suivant
+                    </button>
+
                 </div>
                 <div className="flex  mt-15 w-full items-center justify-center">
                     <h3 className="text-center text-[#D4AF37] font-stretch-50% bg-transparent border border-[#D4AF37] py-2 px-4 rounded-4xl hover:text-[#fffefc] hover:bg-[#D4AF37] hover:border hover:border-[#D4AF37]  transition duration-300"><Link to="/produits-bracelet ">voir tous les produits</Link></h3>
@@ -559,10 +617,10 @@ useEffect(() => {
 
 
                 <div className="grid justify-center md:grid-cols-3 gap-10">
-                    {perruques.map((product) => (
+                    {currentPerruques.map((product) => (
                         <div
                             key={product.id}
-                            className="bg-[#f8f6f6] rounded-3xl  shadow-xl hover:shadow-[#D4AF37]/40 hover:scale-105 transition duration-300 relative"
+                            className="bg-[#f8f6f6] rounded-3xl p-0  shadow-xl hover:shadow-[#D4AF37]/40 hover:scale-105 transition duration-300 relative"
                         >
                             {product.badge && (
                                 <span
@@ -608,7 +666,32 @@ useEffect(() => {
                                 Commander sur WhatsApp
                             </button>
                         </div>
+
                     ))}
+
+                </div>
+                <div className="flex justify-center items-center gap-4 mt-10">
+
+                    <button
+                        disabled={currentPage === 1}
+                        onClick={() => setCurrentPage(currentPage - 1)}
+                        className="px-4 py-2 bg-[#D4AF37] rounded disabled:opacity-50"
+                    >
+                        Précédent
+                    </button>
+
+                    <span className="font-semibold text-black">
+                        Page {currentPage} / {totalPages}
+                    </span>
+
+                    <button
+                        disabled={currentPage === totalPages}
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                        className="px-4 py-2 bg-[#D4AF37] rounded text-black disabled:opacity-50"
+                    >
+                        Suivant
+                    </button>
+
                 </div>
                 <div className="flex  mt-15 w-full items-center justify-center">
                     <button className="text-center text-[#D4AF37] font-stretch-50% bg-transparent border border-[#D4AF37] py-2 px-4 rounded-4xl hover:text-[#fffefc] hover:bg-[#D4AF37] hover:border hover:border-[#D4AF37]  transition duration-300"><Link to="/produits-perruque">voir tous les produits</Link></button>
