@@ -29,6 +29,7 @@ export default function Home() {
     const totalPages = Math.ceil(bracelets.length / productsPerPage);
     const totalBestSellerPages = Math.ceil(bestSellers.length / productsPerPage);
     const totalPerruquePages = Math.ceil(perruques.length / productsPerPage);
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -170,7 +171,7 @@ export default function Home() {
     }, []);
 
     const handleWhatsApp = (product) => {
-        const message = `Bonjour, je veux commander ${product.name} à ${product.price} voici le produit ${product.image}`;
+        const message = `Bonjour, je veux commander ce ${product.name} à ${product.price} voici le produit ${product.image}`;
         window.open(
             `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,
             "_blank"
@@ -208,7 +209,7 @@ export default function Home() {
                         <a href="#accessoires" className="mx-4 hover:text-[#D4AF37] transition">
                             Accessoires
                         </a>
-                        <a href="#cou" className="mx-4 hover:text-[#D4AF37] transition">
+                        <a href="#blog"  className="mx-4 hover:text-[#D4AF37] transition">
                             Blog
                         </a>
                     </div>
@@ -544,7 +545,7 @@ export default function Home() {
 
                 </div>
                 <div className="flex  mt-15 w-full items-center justify-center">
-                    <h3 className="text-center text-[#D4AF37] font-stretch-50% bg-transparent border border-[#D4AF37] py-2 px-4 rounded-4xl hover:text-[#fffefc] hover:bg-[#D4AF37] hover:border hover:border-[#D4AF37]  transition duration-300"><Link to="/produits-bracelet ">voir tous les produits</Link></h3>
+                    <h3 className="text-center text-[#D4AF37] font-stretch-50% bg-transparent border border-[#D4AF37] py-2 px-4 rounded-4xl hover:text-[#fffefc] hover:bg-[#D4AF37] hover:border hover:border-[#D4AF37]  transition duration-300"><Link to="/produits-bracelet">voir tous les produits</Link></h3>
                 </div>
             </section>
             <section className="relative h-[100vh]  overflow-hidden" id="collection">
