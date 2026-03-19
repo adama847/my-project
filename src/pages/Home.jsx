@@ -404,7 +404,7 @@ const currentPerruques = showAllPerruques
         setCurrentPage(1);
       }}
       className="bg-[#D4AF37] text-black px-6 py-2 rounded-full font-semibold"
-    ><Link to="/produits-bracelet">voir tous les produits</Link>
+    ><Link to="/produits-montre">voir tous les produits</Link>
     
     </button>
   </div>
