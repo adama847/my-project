@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { FaInstagramSquare, FaFacebook } from "react-icons/fa";
 import { AiFillTikTok } from "react-icons/ai";
 import { Menu, X } from "lucide-react";
 import img from "../assets/img/Evahh.jpeg";
@@ -11,6 +10,9 @@ export default function Home() {
 
 
     const phoneNumber = "221786632036";
+    const [showAllBracelets, setShowAllBracelets] = useState(false);
+const [showAllBest, setShowAllBest] = useState(false);
+const [showAllPerruques, setShowAllPerruques] = useState(false);
 
     const [bracelets, setBracelets] = useState([]);
     const [bestSellers, setBestSellers] = useState([]);
@@ -23,9 +25,17 @@ export default function Home() {
     const productsPerPage = 6;
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentbracelets = bracelets.slice(indexOfFirstProduct, indexOfLastProduct);
-    const currentBestSellers = bestSellers.slice(indexOfFirstProduct, indexOfLastProduct);
-    const currentPerruques = perruques.slice(indexOfFirstProduct, indexOfLastProduct);
+   const currentbracelets = showAllBracelets
+  ? bracelets.slice(indexOfFirstProduct, indexOfLastProduct)
+  : bracelets.slice(0, 6);
+
+const currentBestSellers = showAllBest
+  ? bestSellers.slice(indexOfFirstProduct, indexOfLastProduct)
+  : bestSellers.slice(0, 6);
+
+const currentPerruques = showAllPerruques
+  ? perruques.slice(indexOfFirstProduct, indexOfLastProduct)
+  : perruques.slice(0, 6);
     const totalPages = Math.ceil(bracelets.length / productsPerPage);
     const totalBestSellerPages = Math.ceil(bestSellers.length / productsPerPage);
     const totalPerruquePages = Math.ceil(perruques.length / productsPerPage);
@@ -371,50 +381,60 @@ export default function Home() {
                                 />
                             )}
 
-                            <h4 className="text-xl ml-5 font-semibold text-black">{product.name}</h4>
-
-                            <p className="text-[#D4AF37] ml-5 font-bold mt-2 text-lg">
-                                {product.price}
-                            </p>
-
-                            <button
-                                onClick={() => handleWhatsApp(product)}
-                                className="mt-6 w-full bg-[#D4AF37] text-black py-2 mb-5 rounded-full font-semibold hover:bg-black hover:text-[#D4AF37] hover:border hover:border-[#D4AF37] transition duration-300"
-                            >
-                                <FaWhatsapp className="inline-block text-lg mb-1 mr-1" />
-                                Commander sur WhatsApp
-                            </button>
+                           <div className="p-3 md:p-5">
+                                                           <h4 className="text-sm md:text-xl font-bold text-black truncate">{product.name}</h4>
+                                                           <p className="text-[#D4AF37] font-bold mt-3 text-sm md:text-lg">{product.price} FCFA</p>
+                                                           <button 
+                                                               onClick={() => handleWhatsApp(product)}
+                                                               className="mt-4 w-full bg-[#D4AF37] text-black py-2 rounded-xl text-[14px] md:text-sm font-bold flex items-center justify-center gap-1 hover:bg-black hover:text-[#D4AF37] transition duration-300"
+                                                           >
+                                                               <FaWhatsapp className="text-base " /> Commander
+                                                           </button>
+                                                       </div>
                         </div>
                     ))}
                     
 
                 </div>
-                 <div className="flex justify-center items-center gap-4 mt-10">
+                {!showAllBracelets && bracelets.length > 6 && (
+  <div className="flex justify-center mt-10">
+    <button
+      onClick={() => {
+        setShowAllBracelets(true);
+        setCurrentPage(1);
+      }}
+      className="bg-[#D4AF37] text-black px-6 py-2 rounded-full font-semibold"
+    ><Link to="/produits-bracelet">voir tous les produits</Link>
+    
+    </button>
+  </div>
+)}
+                 {showAllBracelets && (
+  <div className="flex justify-center items-center gap-4 mt-10">
 
-                    <button
-                        disabled={currentPage === 1}
-                        onClick={() => setCurrentPage(currentPage - 1)}
-                        className="px-4 py-2 bg-[#D4AF37] rounded disabled:opacity-50"
-                    >
-                        Précédent
-                    </button>
+    <button
+      disabled={currentPage === 1}
+      onClick={() => setCurrentPage(currentPage - 1)}
+      className="px-4 py-2 bg-[#D4AF37] rounded disabled:opacity-50"
+    >
+      Précédent
+    </button>
 
-                    <span className="font-semibold text-black">
-                        Page {currentPage} / {totalPages}
-                    </span>
+    <span className="font-semibold text-black">
+      Page {currentPage} / {totalPages}
+    </span>
 
-                    <button
-                        disabled={currentPage === totalPages}
-                        onClick={() => setCurrentPage(currentPage + 1)}
-                        className="px-4 py-2 bg-[#D4AF37] rounded text-black disabled:opacity-50"
-                    >
-                        Suivant
-                    </button>
+    <button
+      disabled={currentPage === totalPages}
+      onClick={() => setCurrentPage(currentPage + 1)}
+      className="px-4 py-2 bg-[#D4AF37] rounded text-black disabled:opacity-50"
+    >
+      Suivant
+    </button>
 
-                </div>
-                <div className="flex  mt-15 w-full items-center justify-center">
-                    <h3 className="text-center text-[#D4AF37] font-stretch-50% bg-transparent border border-[#D4AF37] py-2 px-4 rounded-4xl hover:text-[#fffefc] hover:bg-[#D4AF37] hover:border hover:border-[#D4AF37]  transition duration-300"><Link to="/produits-montre">voir tous les produits</Link></h3>
-                </div>
+  </div>
+)}
+              
             </section>
             <section className="relative h-[100vh]  overflow-hidden" id="collection">
 
@@ -504,49 +524,34 @@ export default function Home() {
                             )}
 
 
-                            <h4 className="text-xl font-semibold ml-5 text-black">{product.name}</h4>
-
-                            <p className="text-[#D4AF37] font-bold mt-2 ml-5 text-lg">
-                                {product.price}
-                            </p>
-
-                            <button
-                                onClick={() => handleWhatsApp(product)}
-                                className="mt-6 mb-5 w-full bg-[#D4AF37] text-black py-2 rounded-full font-semibold hover:bg-black hover:text-[#D4AF37] hover:border hover:border-[#D4AF37] transition duration-300"
-                            >
-                                <FaWhatsapp className="inline-block text-lg mr-1 mb-1" />
-                                Commander sur WhatsApp
-                            </button>
+                           <div className="p-3 md:p-5">
+                                                           <h4 className="text-sm md:text-xl font-bold text-black truncate">{product.name}</h4>
+                                                           <p className="text-[#D4AF37] font-bold mt-3 text-sm md:text-lg">{product.price} FCFA</p>
+                                                           <button 
+                                                               onClick={() => handleWhatsApp(product)}
+                                                               className="mt-4 w-full bg-[#D4AF37] text-black py-2 rounded-xl text-[14px] md:text-sm font-bold flex items-center justify-center gap-1 hover:bg-black hover:text-[#D4AF37] transition duration-300"
+                                                           >
+                                                               <FaWhatsapp className="text-base " /> Commander
+                                                           </button>
+                                                       </div>
                         </div>
                     ))}
                      
                 </div>
-                <div className="flex justify-center items-center gap-4 mt-10">
-
-                    <button
-                        disabled={currentPage === 1}
-                        onClick={() => setCurrentPage(currentPage - 1)}
-                        className="px-4 py-2 bg-[#D4AF37] rounded disabled:opacity-50"
-                    >
-                        Précédent
-                    </button>
-
-                    <span className="font-semibold text-black">
-                        Page {currentPage} / {totalPages}
-                    </span>
-
-                    <button
-                        disabled={currentPage === totalPages}
-                        onClick={() => setCurrentPage(currentPage + 1)}
-                        className="px-4 py-2 bg-[#D4AF37] rounded text-black disabled:opacity-50"
-                    >
-                        Suivant
-                    </button>
-
-                </div>
-                <div className="flex  mt-15 w-full items-center justify-center">
-                    <h3 className="text-center text-[#D4AF37] font-stretch-50% bg-transparent border border-[#D4AF37] py-2 px-4 rounded-4xl hover:text-[#fffefc] hover:bg-[#D4AF37] hover:border hover:border-[#D4AF37]  transition duration-300"><Link to="/produits-bracelet">voir tous les produits</Link></h3>
-                </div>
+                {!showAllBest && bestSellers.length > 6 && (
+  <div className="flex justify-center mt-10">
+    <button
+      onClick={() => {
+        setShowAllBest(true);
+        setCurrentPage(1);
+      }}
+      className="bg-[#D4AF37] text-black px-6 py-2 rounded-full font-semibold"
+    ><Link to="/produits-bracelet">voir tous les produits</Link>
+      Voir plus
+    </button>
+  </div>
+)}
+               
             </section>
             <section className="relative h-[100vh]  overflow-hidden" id="collection">
 
@@ -653,50 +658,60 @@ export default function Home() {
                             )}
 
 
-                            <h4 className="text-xl font-semibold ml-5 text-black">{product.name}</h4>
-
-                            <p className="text-[#D4AF37] ml-5 font-bold mt-2 text-lg">
-                                {product.price}
-                            </p>
-
-                            <button
-                                onClick={() => handleWhatsApp(product)}
-                                className="mt-6 mb-5 w-full bg-[#D4AF37] text-black py-2 rounded-full font-semibold hover:bg-black hover:text-[#D4AF37] hover:border hover:border-[#D4AF37] transition duration-300"
-                            >
-                                <FaWhatsapp className="inline-block text-lg mr-1 mb-1" />
-                                Commander sur WhatsApp
-                            </button>
+                           <div className="p-3 md:p-5">
+                                                           <h4 className="text-sm md:text-xl font-bold text-black truncate">{product.name}</h4>
+                                                           <p className="text-[#D4AF37] font-bold mt-3 text-sm md:text-lg">{product.price} FCFA</p>
+                                                           <button 
+                                                               onClick={() => handleWhatsApp(product)}
+                                                               className="mt-4 w-full bg-[#D4AF37] text-black py-2 rounded-xl text-[14px] md:text-sm font-bold flex items-center justify-center gap-1 hover:bg-black hover:text-[#D4AF37] transition duration-300"
+                                                           >
+                                                               <FaWhatsapp className="text-base " /> Commander
+                                                           </button>
+                                                       </div>
                         </div>
 
                     ))}
 
                 </div>
-                <div className="flex justify-center items-center gap-4 mt-10">
+                {!showAllPerruques && perruques.length > 6 && (
+  <div className="flex justify-center mt-10">
+    <button
+      onClick={() => {
+        setShowAllPerruques(true);
+        setCurrentPage(1);
+      }}
+      className="bg-[#D4AF37] text-black px-6 py-2 rounded-full font-semibold"
+    >
+      Voir plus
+    </button>
+  </div>
+)}
+  {showAllPerruques && (
+  <div className="flex justify-center items-center gap-4 mt-10">
 
-                    <button
-                        disabled={currentPage === 1}
-                        onClick={() => setCurrentPage(currentPage - 1)}
-                        className="px-4 py-2 bg-[#D4AF37] rounded disabled:opacity-50"
-                    >
-                        Précédent
-                    </button>
+    <button
+      disabled={currentPage === 1}
+      onClick={() => setCurrentPage(currentPage - 1)}
+      className="px-4 py-2 bg-[#D4AF37] rounded disabled:opacity-50"
+    >
+      Précédent
+    </button>
 
-                    <span className="font-semibold text-black">
-                        Page {currentPage} / {totalPages}
-                    </span>
+    <span className="font-semibold text-black">
+      Page {currentPage} / {totalPages}
+    </span>
 
-                    <button
-                        disabled={currentPage === totalPages}
-                        onClick={() => setCurrentPage(currentPage + 1)}
-                        className="px-4 py-2 bg-[#D4AF37] rounded text-black disabled:opacity-50"
-                    >
-                        Suivant
-                    </button>
+    <button
+      disabled={currentPage === totalPages}
+      onClick={() => setCurrentPage(currentPage + 1)}
+      className="px-4 py-2 bg-[#D4AF37] rounded text-black disabled:opacity-50"
+    >
+      Suivant
+    </button>
 
-                </div>
-                <div className="flex  mt-15 w-full items-center justify-center">
-                    <button className="text-center text-[#D4AF37] font-stretch-50% bg-transparent border border-[#D4AF37] py-2 px-4 rounded-4xl hover:text-[#fffefc] hover:bg-[#D4AF37] hover:border hover:border-[#D4AF37]  transition duration-300"><Link to="/produits-perruque">voir tous les produits</Link></button>
-                </div>
+  </div>
+)}
+               
             </section>
 
             {/* WHATSAPP FLOATING BUTTON */}
@@ -717,13 +732,8 @@ export default function Home() {
                     </p>
                     <p className="text-gray-400">suivez-nour sur</p>
                     <div className="flex items-center mt-3">
-                        <a href="https://www.instagram.com/evahstore" target="_blank" rel="noopener noreferrer">
-                            <FaInstagramSquare className="text-[#ffffff] hover:text-[#D4AF37] text-2xl mr-4" />
-                        </a>
-                        <a href="https://www.facebook.com/evahstore" target="_blank" rel="noopener noreferrer">
-                            <FaFacebook className="text-[#ffffff] hover:text-[#D4AF37] text-2xl " />
-                        </a>
-                        <a href="https://www.tiktok.com/@evahstore" target="_blank" rel="noopener noreferrer">
+                        
+                        <a href="https://www.tiktok.com/@evahstore0?_r=1&_t=ZS-94RrIRsJu7R" target="_blank" rel="noopener noreferrer">
                             <AiFillTikTok className="text-[#ffffff] hover:text-[#D4AF37] text-3xl ml-4" />
                         </a>
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaWhatsapp, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 import { IoArrowBackCircle } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
@@ -8,18 +8,24 @@ export default function ProduitsMontre() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     
-    // États pour la pagination
+    // États pour la pagination et l'affichage
     const [currentPage, setCurrentPage] = useState(1);
+    const [showAll, setShowAll] = useState(false); // Masque la pagination au début
     const productsPerPage = 6;
 
-    // Sécurisation HTTPS
-    const secureUrl = (url) => url ? url.replace("http://", "https://") : "";
+    // FIX ERREUR CONNECTION CLOSED : Ne force le HTTPS que si on n'est pas en local
+    const secureUrl = (url) => {
+        if (!url) return "";
+        const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+        if (isLocal) return url; // Garde http:// en local
+        return url.replace("http://", "https://"); // Force https en ligne (Railway)
+    };
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const API_URL = import.meta.env.VITE_API_URL || "https://evahstore-backend-production.up.railway.app";
+                const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
                 const response = await fetch(`${API_URL}/products?category=bracelet`);
                 if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
                 const data = await response.json();
@@ -33,34 +39,34 @@ export default function ProduitsMontre() {
         fetchData();
     }, []);
 
-    // --- LOGIQUE DE DÉFILEMENT AUTOMATIQUE ---
+    // --- LOGIQUE DÉFILEMENT AUTO (uniquement si showAll est activé) ---
     useEffect(() => {
-        // On ne lance le défilement que s'il y a plus de 6 produits
-        if (bracelets.length <= productsPerPage) return;
-
+        if (!showAll || bracelets.length <= productsPerPage) return;
         const totalPages = Math.ceil(bracelets.length / productsPerPage);
-        
         const interval = setInterval(() => {
-            setCurrentPage((prevPage) => (prevPage >= totalPages ? 1 : prevPage + 1));
-        }, 5000); // Change toutes les 5 secondes
+            setCurrentPage((prev) => (prev >= totalPages ? 1 : prev + 1));
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [showAll, bracelets]);
 
-        return () => clearInterval(interval); // Nettoyage à la fermeture
-    }, [bracelets]);
-
-    // Calculs de pagination
+    // Calculs d'affichage
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = bracelets.slice(indexOfFirstProduct, indexOfLastProduct);
+    
+    // Si showAll est faux, on ne montre que les 6 premiers sans pagination
+    const currentProducts = showAll 
+        ? bracelets.slice(indexOfFirstProduct, indexOfLastProduct) 
+        : bracelets.slice(0, 6);
+
     const totalPages = Math.ceil(bracelets.length / productsPerPage);
 
     const handleWhatsApp = (product) => {
         const phoneNumber = "221786632036";
-        const message = `Bonjour, je veux commander ${product.name} à ${product.price} FCFA. Image : ${product.image_url}`;
+        const message = `Bonjour, je veux commander ${product.name} à ${product.price} FCFA.`;
         window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, "_blank");
     };
 
     if (loading) return <div className="p-20 text-center font-bold">Chargement...</div>;
-    if (error) return <div className="p-6 text-red-600 text-center">⚠️ Erreur : {error}</div>;
 
     return (
         <div className="min-h-screen bg-[#f0eeee] pb-20">
@@ -71,60 +77,44 @@ export default function ProduitsMontre() {
                     <span className="text-lg">Retour</span>
                 </Link>
 
-                <h3 className="text-3xl font-bold text-center text-black mb-2 font-serif">
-                    Fétiche & Bracelet
-                </h3>
+                <h3 className="text-3xl font-bold text-center text-black mb-2 font-serif">Fétiche & Bracelet</h3>
                 <div className="w-16 h-1 bg-[#D4AF37] mx-auto mb-10" />
 
-                {/* Grille avec transition douce lors du changement de page */}
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10 pb-6 transition-opacity duration-500">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10 pb-6">
                     {currentProducts.map((product) => (
-                        <div
-                            key={product.id}
-                            className="bg-white rounded-2xl shadow-lg flex flex-col justify-between relative overflow-hidden border border-gray-100 animate-fadeIn"
-                        >
-                            {product.badge && (
-                                <span className={`absolute top-3 left-3 z-20 text-black text-[10px] px-2 py-1 rounded-full font-bold ${
-                                    product.badge === "Nouveau" ? "bg-[#D4AF37]" : "bg-red-500 text-white"
-                                }`}>
-                                    {product.badge}
-                                </span>
-                            )}
-
+                        <div key={product.id} className="bg-white rounded-2xl shadow-lg flex flex-col justify-between relative overflow-hidden border border-gray-100">
                             <div className="relative group overflow-hidden">
                                 {product.is_video ? (
-                                    <video
-                                        src={secureUrl(product.image_url)}
-                                        autoPlay muted loop playsInline
-                                        className="w-full h-44 md:h-80 object-cover"
-                                    />
+                                    <video src={secureUrl(product.image_url)} autoPlay muted loop playsInline className="w-full h-44 md:h-80 object-cover" />
                                 ) : (
-                                    <img
-                                        src={secureUrl(product.image_url)}
-                                        alt={product.name}
-                                        className="w-full h-44 md:h-80 object-cover"
-                                    />
+                                    <img src={secureUrl(product.image_url)} alt={product.name} className="w-full h-44 md:h-80 object-cover" />
                                 )}
                             </div>
-
                             <div className="p-3 md:p-5">
                                 <h4 className="text-sm md:text-xl font-bold text-black truncate">{product.name}</h4>
                                 <p className="text-[#D4AF37] font-bold mt-1 text-sm md:text-lg">{product.price} FCFA</p>
-
-                                <button
-                                    onClick={() => handleWhatsApp(product)}
-                                    className="mt-4 w-full bg-[#D4AF37] text-black py-2 rounded-xl text-[10px] md:text-sm font-bold flex items-center justify-center gap-1 hover:bg-black hover:text-[#D4AF37] transition duration-300 shadow-sm"
-                                >
-                                    <FaWhatsapp className="text-base" />
-                                    Commander
+                                <button onClick={() => handleWhatsApp(product)} className="mt-4 w-full bg-[#D4AF37] text-black py-2 rounded-xl text-[10px] md:text-sm font-bold flex items-center justify-center gap-1 hover:bg-black hover:text-[#D4AF37] transition duration-300 shadow-sm">
+                                    <FaWhatsapp className="text-base" /> Commander
                                 </button>
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Indicateurs (Dots) de pagination automatique */}
-                {totalPages > 1 && (
+                {/* BOUTON VOIR PLUS : Masque la pagination au début */}
+                {!showAll && bracelets.length > 6 && (
+                    <div className="flex justify-center mt-10">
+                        <button 
+                            onClick={() => setShowAll(true)}
+                            className="px-10 py-3 bg-black text-[#D4AF37] border-2 border-[#D4AF37] rounded-full font-bold hover:bg-[#D4AF37] hover:text-black transition-all duration-300 shadow-xl"
+                        >
+                            VOIR TOUS LES PRODUITS
+                        </button>
+                    </div>
+                )}
+
+                {/* PAGINATION : Apparaît seulement après avoir cliqué sur Voir Plus */}
+                {showAll && totalPages > 1 && (
                     <div className="flex justify-center items-center gap-2 mt-8">
                         {[...Array(totalPages)].map((_, i) => (
                             <button
