@@ -241,7 +241,7 @@ export default function Home() {
                             Accessoires
                         </a>
                         <a
-                            href="#Blog"
+                            href="#blog"
                             className="block hover:text-[#D4AF37] transition"
                             onClick={() => setOpen(false)}
                         >
@@ -577,7 +577,7 @@ export default function Home() {
 
                 <div
                     key={current2 + "-content"}
-                    className="absolute inset-0 flex flex-col items-center justify-end pb-24 px-6 text-center" id="Blog">
+                    className="absolute inset-0 flex flex-col items-center justify-end pb-24 px-6 text-center" id="blog">
 
                     <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 animate-slide-Up">
                         {slides3[current2].title}
@@ -588,7 +588,7 @@ export default function Home() {
                         {slides3[current2].text}
                     </p>
 
-                    <button className="mt-10 bg-[#D4AF37] text-black px-10 py-3 rounded-full hover:bg-black hover:text-[#D4AF37] border border-transparent hover:border-[#D4AF37] transition duration-300 animate-fadeIn" id="accessoires"
+                    <button className="mt-10 bg-[#D4AF37] text-black px-10 py-3 rounded-full hover:bg-black hover:text-[#D4AF37] border border-transparent hover:border-[#D4AF37] transition duration-300 animate-fadeIn"
                         style={{ animationDelay: "0.6s" }}>
                         Blog
                     </button>
