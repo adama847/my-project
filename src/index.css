@@ -108,3 +108,34 @@
   animation: fadeIn 1s ease-out, slideUp 1s ease-out;
 }
 
+.splash-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff; /* Couleur de fond */
+}
+
+.loader-logo {
+  width: 100px;
+  animation: pulse 1.5s infinite; /* Optionnel : petit effet d'animation */
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@theme {
+  /* Définition de l'animation personnalisée */
+  @keyframes gradient-move {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Création de la classe utilitaire d'animation */
+  --animate-gradient: gradient-move 8s ease infinite;
+}
+

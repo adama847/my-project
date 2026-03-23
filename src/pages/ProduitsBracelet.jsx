@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import { IoArrowBackCircle } from "react-icons/io5";
+import { Loader2 } from "lucide-react";
 
 export default function ProduitsBracelet() {
     const [bestSellers, setBestSellers] = useState([]);
@@ -69,8 +70,12 @@ export default function ProduitsBracelet() {
         window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, "_blank");
     };
 
-    if (loading) return <div className="p-20 text-center font-bold">Chargement de la collection...</div>;
-    if (error) return <div className="p-10 text-center text-red-500 font-bold">{error}</div>;
+if (loading) return (
+  <div className="flex flex-col items-center justify-center p-20 gap-3">
+    <Loader2 className="h-10 w-10 animate-spin text-[#0a0904]" />
+    <span className="text-[#dbbc0e] font-medium animate-pulse">Un instant...</span>
+  </div>
+);    if (error) return <div className="p-10 text-center text-red-500 font-bold">{error}</div>;
 
     return (
         <div className="min-h-screen bg-[#f0eeee] pb-20">
@@ -86,7 +91,7 @@ export default function ProduitsBracelet() {
                 </h3>
                 <div className="w-16 h-1 bg-[#D4AF37] mx-auto mb-10" />
 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10 pb-6 transition-all duration-700 ease-in-out">
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 pb-6 transition-all duration-700 ease-in-out">
                     {currentProducts.map((product) => (
                         <div
                             key={product.id}

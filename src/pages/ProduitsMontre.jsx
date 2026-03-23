@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { IoArrowBackCircle } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { Loader2 } from "lucide-react";
+
 
 export default function ProduitsMontre() {
     const [bracelets, setBracelets] = useState([]);
@@ -66,8 +68,12 @@ export default function ProduitsMontre() {
         window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, "_blank");
     };
 
-    if (loading) return <div className="p-20 text-center font-bold">Chargement...</div>;
-
+if (loading) return (
+  <div className="flex flex-col items-center justify-center p-20 gap-3">
+    <Loader2 className="h-10 w-10 animate-spin text-[#0a0904]" />
+    <span className="text-[#dbbc0e] font-medium animate-pulse">Un instant...</span>
+  </div>
+);
     return (
         <div className="min-h-screen bg-[#f0eeee] pb-20">
             <section className="px-4 md:px-8 py-10">
@@ -80,7 +86,7 @@ export default function ProduitsMontre() {
                 <h3 className="text-3xl font-bold text-center text-black mb-2 font-serif">Fétiche & Bracelet</h3>
                 <div className="w-16 h-1 bg-[#D4AF37] mx-auto mb-10" />
 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10 pb-6">
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 pb-6">
                     {currentProducts.map((product) => (
                         <div key={product.id} className="bg-white rounded-2xl shadow-lg flex flex-col justify-between relative overflow-hidden border border-gray-100">
                             <div className="relative group overflow-hidden">

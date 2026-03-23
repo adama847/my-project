@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import img from "../assets/img/Evahh.jpeg";
 import { FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+import { Loader2 } from "lucide-react";
 export default function Home() {
 
 
@@ -188,8 +188,12 @@ const currentPerruques = showAllPerruques
         );
     };
 
-    if (loading) return <div className="p-6 text-center">Chargement...</div>;
-    if (error)
+if (loading) return (
+  <div className="flex flex-col items-center justify-center p-20 gap-3">
+    <Loader2 className="h-10 w-10 animate-spin text-[#0a0904]" />
+    <span className="text-[#dbbc0e] font-medium animate-pulse">Un instant...</span>
+  </div>
+);    if (error)
         return (
             <div className="p-6 bg-red-50 border border-red-200 rounded-xl text-red-600">
                 ⚠️ Erreur : {error}
@@ -347,7 +351,7 @@ const currentPerruques = showAllPerruques
                 </h3>
                 <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-8" />
 
-                <div className="grid justify-center md:grid-cols-3  gap-10">
+                <div className="grid justify-center md:grid-cols-2 lg:grid-cols-3 gap-10">
                     {currentbracelets.map((product) => (
                         <div
                             key={product.id}
@@ -500,7 +504,7 @@ const currentPerruques = showAllPerruques
                 <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-5" />
 
 
-                <div className="grid justify-center md:grid-cols-3  gap-10">
+                <div className="grid justify-center md:grid-cols-2 lg:grid-cols-3  gap-10">
                     {currentBestSellers.map((product) => (
                         <div
                             key={product.id}
@@ -622,7 +626,7 @@ const currentPerruques = showAllPerruques
                 <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-8" />
 
 
-                <div className="grid justify-center md:grid-cols-3 gap-10">
+                <div className="grid justify-center md:grid-cols-2 lg:grid-cols-3 gap-10">
                     {currentPerruques.map((product) => (
                         <div
                             key={product.id}
